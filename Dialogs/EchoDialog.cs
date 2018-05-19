@@ -65,7 +65,7 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
 
                             var respStr = await resp.Content.ReadAsStringAsync();
 
-                            await context.PostAsync($"{respStr}");
+                            //await context.PostAsync($"{respStr}");
 
                             JObject json = JObject.Parse(respStr);
 
@@ -73,8 +73,9 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
                             {
                                 var tag = prediction["tagName"];
                                 var percent = decimal.Parse(prediction["probability"].ToString()) * 100;
+                                var percentStr = percent.ToString("0.##");
 
-                                await context.PostAsync($"{tag} {percent}%");
+                                await context.PostAsync($"{tag} {percentStr}%");
                             }
 
                         }
