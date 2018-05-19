@@ -1,10 +1,9 @@
+using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Connector;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-
-using Microsoft.Bot.Connector;
-using Microsoft.Bot.Builder.Dialogs;
 using System.Web.Http.Description;
-using System.Net.Http;
 
 namespace Microsoft.Bot.Sample.SimpleEchoBot
 {
@@ -22,7 +21,7 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
             // check if activity is of type message
             if (activity != null && activity.GetActivityType() == ActivityTypes.Message)
             {
-                await Conversation.SendAsync(activity, () => new EchoDialog());
+                await Conversation.SendAsync(activity, () => new RootDialog());
             }
             else
             {
