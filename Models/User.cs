@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace SimpleEchoBot.Models
 {
@@ -13,5 +10,20 @@ namespace SimpleEchoBot.Models
         public string budget { get; set; }
         public Boolean married { get; set; }
         public Boolean kids { get; set; }
+
+        public string BudgetOption1 { get; set; }
+        public string BudgetOption2 { get; set; }
+        public string BudgetOption3 { get; set; }
+        public string BudgetOption4 { get; set; }
+        public string BudgetOption5 { get; set; }
+
+        public User()
+        {
+            this.BudgetOption1 = "500k - 600k";
+            this.BudgetOption2 = "600k - 800k";
+            this.BudgetOption3 = "800k - 1.2m";
+            this.BudgetOption4 = "1.2m - 1.5m";
+            this.BudgetOption5 = "More than 1.5m";
+        }
     }
 }
