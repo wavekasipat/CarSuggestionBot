@@ -22,6 +22,14 @@ namespace SimpleEchoBot.Models
         public string suggestUrl { get; set; }
         public string suggestImage { get; set; }
 
+        public string suggestCar2 { get; set; }
+        public string suggestUrl2 { get; set; }
+        public string suggestImage2 { get; set; }
+
+        public string suggestCar3 { get; set; }
+        public string suggestUrl3 { get; set; }
+        public string suggestImage3 { get; set; }
+
         public User()
         {
             this.BudgetOption1 = "500k - 600k";

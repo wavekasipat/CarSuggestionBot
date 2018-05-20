@@ -15,7 +15,7 @@ namespace SimpleEchoBot.Dialogs
     {
         private User user = new User();
         private int attempts = 3;
-        
+
         public FaceDialog(User user)
         {
             this.user = user;
@@ -46,7 +46,7 @@ namespace SimpleEchoBot.Dialogs
                         var face = json[0];
                         this.user.gender = face["faceAttributes"]["gender"].ToString();
                         this.user.age = decimal.Parse(face["faceAttributes"]["age"].ToString());
-                        
+
                         List<string> options = new List<string>() { "Yes", "No" };
                         var quiz = $"Oh, I see you. You are a {this.user.gender} right?";
                         PromptDialog.Choice(context, this.OnGenderSelected, options, quiz, "Not a valid option", 3);
@@ -54,7 +54,7 @@ namespace SimpleEchoBot.Dialogs
                     else
                     {
                         --attempts;
-                        await context.PostAsync($"I can't see anyone in this photo.");
+                        await context.PostAsync($"I can't see anyone in this photo, Please send me a photo.");
                         context.Wait(MessageReceivedAsync);
                     }
                 }
@@ -113,8 +113,7 @@ namespace SimpleEchoBot.Dialogs
             }
             catch (TooManyAttemptsException ex)
             {
-                await context.PostAsync($"Ooops! Too many attempts :(. But don't worry, I'm handling that exception and you can try again!");
-                context.Wait(this.MessageReceivedAsync);
+                context.Fail(new TooManyAttemptsException("Ooops! Too many attempts :(. But don't worry, I'm handling that exception and you can try again!"));
             }
         }
 
@@ -130,8 +129,7 @@ namespace SimpleEchoBot.Dialogs
             }
             catch (TooManyAttemptsException ex)
             {
-                await context.PostAsync($"Ooops! Too many attempts :(. But don't worry, I'm handling that exception and you can try again!");
-                context.Wait(this.MessageReceivedAsync);
+                context.Fail(new TooManyAttemptsException("Ooops! Too many attempts :(. But don't worry, I'm handling that exception and you can try again!"));
             }
         }
 
@@ -158,8 +156,7 @@ namespace SimpleEchoBot.Dialogs
             }
             catch (TooManyAttemptsException ex)
             {
-                await context.PostAsync($"Ooops! Too many attempts :(. But don't worry, I'm handling that exception and you can try again!");
-                context.Wait(this.MessageReceivedAsync);
+                context.Fail(new TooManyAttemptsException("Ooops! Too many attempts :(. But don't worry, I'm handling that exception and you can try again!"));
             }
         }
 
@@ -182,8 +179,7 @@ namespace SimpleEchoBot.Dialogs
             }
             catch (TooManyAttemptsException ex)
             {
-                await context.PostAsync($"Ooops! Too many attempts :(. But don't worry, I'm handling that exception and you can try again!");
-                context.Wait(this.MessageReceivedAsync);
+                context.Fail(new TooManyAttemptsException("Ooops! Too many attempts :(. But don't worry, I'm handling that exception and you can try again!"));
             }
         }
     }

@@ -1,11 +1,11 @@
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
+using SimpleEchoBot.Dialogs;
+using SimpleEchoBot.Models;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using SimpleEchoBot.Models;
-using SimpleEchoBot.Dialogs;
 
 namespace Microsoft.Bot.Sample.SimpleEchoBot
 {
@@ -23,36 +23,6 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
         {
             var message = await argument;
             await this.SendWelcomeMessageAsync(context);
-
-            //if (message.Attachments != null && message.Attachments.Count > 0)
-            //{
-            //    var attachment = message.Attachments[0];
-
-            //    if (attachment.ContentType == "image/png" || attachment.ContentType == "image/jpeg")
-            //    {
-            //        var contentStream = await ImageStream.GetImageStream(attachment.ContentUrl);
-
-            //        JObject json = await CustomVision.GetCustomVisionJson(contentStream);
-
-            //        foreach (var prediction in json["predictions"])
-            //        {
-            //            var tag = prediction["tagName"];
-            //            var percent = decimal.Parse(prediction["probability"].ToString()) * 100;
-            //            var percentStr = percent.ToString("0.##");
-
-            //            await context.PostAsync($"{tag} {percentStr}%");
-            //        }
-            //    }
-            //    else
-            //    {
-            //        await context.PostAsync($"I don't understand this file. Please send me a picture");
-            //    }
-            //}
-            //else
-            //{
-            //    await context.PostAsync($"{this.count++}: You said {message.Text}");
-            //    context.Wait(MessageReceivedAsync);
-            //}
         }
 
         private async Task SendWelcomeMessageAsync(IDialogContext context)
@@ -95,7 +65,6 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
             catch (TooManyAttemptsException)
             {
                 await context.PostAsync("I'm sorry, I'm having issues understanding you. Let's try again.");
-
                 await this.SendWelcomeMessageAsync(context);
             }
         }
@@ -110,7 +79,6 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
             catch (TooManyAttemptsException)
             {
                 await context.PostAsync("I'm sorry, I'm having issues understanding you. Let's try again.");
-
                 await this.SendWelcomeMessageAsync(context);
             }
         }
