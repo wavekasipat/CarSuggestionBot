@@ -73,7 +73,7 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
                         break;
 
                     case "No":
-                        await context.PostAsync($"Oh I'm sorry to hear that, But you can call me anytime.");
+                        await context.PostAsync($"Oh, I'm sorry to hear that. You can chat to me again anytime.");
                         context.Wait(this.MessageReceivedAsync);
                         break;
                 }
@@ -90,8 +90,22 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
             try
             {
                 this.user = await result;
+                context.Call(new SuggestDialog(this.user), this.SuggestDialogResumeAfter);
+            }
+            catch (TooManyAttemptsException)
+            {
+                await context.PostAsync("I'm sorry, I'm having issues understanding you. Let's try again.");
 
                 await this.SendWelcomeMessageAsync(context);
+            }
+        }
+
+        private async Task SuggestDialogResumeAfter(IDialogContext context, IAwaitable<User> result)
+        {
+            try
+            {
+                this.user = await result;
+                context.Wait(this.MessageReceivedAsync);
             }
             catch (TooManyAttemptsException)
             {

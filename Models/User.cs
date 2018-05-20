@@ -10,12 +10,17 @@ namespace SimpleEchoBot.Models
         public string budget { get; set; }
         public Boolean married { get; set; }
         public Boolean kids { get; set; }
+        public string mobile { get; set; }
 
         public string BudgetOption1 { get; set; }
         public string BudgetOption2 { get; set; }
         public string BudgetOption3 { get; set; }
         public string BudgetOption4 { get; set; }
         public string BudgetOption5 { get; set; }
+
+        public string suggestCar { get; set; }
+        public string suggestUrl { get; set; }
+        public string suggestImage { get; set; }
 
         public User()
         {

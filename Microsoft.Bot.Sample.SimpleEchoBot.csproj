@@ -181,6 +181,7 @@
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Dialogs\FaceDialog.cs" />
     <Compile Include="Dialogs\RootDialog.cs" />
+    <Compile Include="Dialogs\SuggestDialog.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
