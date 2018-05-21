@@ -30,6 +30,11 @@ namespace SimpleEchoBot.Models
         public string suggestUrl3 { get; set; }
         public string suggestImage3 { get; set; }
 
+        public string sellInCar { get; set; }
+        public decimal sellInOriginPrice { get; set; }
+        public decimal sellInPrice { get; set; }
+        public int sellInYear { get; set; }
+
         public User()
         {
             this.BudgetOption1 = "500k - 600k";
