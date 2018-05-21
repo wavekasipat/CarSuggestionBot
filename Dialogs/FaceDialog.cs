@@ -23,7 +23,7 @@ namespace SimpleEchoBot.Dialogs
 
         public async Task StartAsync(IDialogContext context)
         {
-            await context.PostAsync($"Firstly, I want to see your face. You can take your photo and send to Me.");
+            await context.PostAsync($"Firstly, I want to see you. You can take your photo and send to Me.");
             context.Wait(MessageReceivedAsync);
         }
 
