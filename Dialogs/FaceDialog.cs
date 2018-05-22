@@ -23,7 +23,7 @@ namespace SimpleEchoBot.Dialogs
 
         public async Task StartAsync(IDialogContext context)
         {
-            await context.PostAsync($"Firstly, I want to see you. You can take your photo and send to Me.");
+            await context.PostAsync($"ข้าอยากเห็นหน้าออเจ้า ออเจ้าส่งรูปถ่ายใบหน้าของออเจ้ามาให้ข้าด้วยเถิดหนา");
             context.Wait(MessageReceivedAsync);
         }
 
@@ -56,34 +56,34 @@ namespace SimpleEchoBot.Dialogs
                             this.user.genderThai = "แม่หญิง";
                         }
 
-                        List<string> options = new List<string>() { "Yes", "No" };
-                        var quiz = $"Oh, I see you. You are a {this.user.gender} right?";
-                        PromptDialog.Choice(context, this.OnGenderSelected, options, quiz, "Not a valid option", 3);
+                        List<string> options = new List<string>() { "ใช่", "ไม่" };
+                        var quiz = $"ข้าเห็นหน้าออเจ้าแล้ว ออเจ้าเป็น "+ this.user.genderThai + " ใช่หรือไม่";
+                        PromptDialog.Choice(context, this.OnGenderSelected, options, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
                     }
                     else
                     {
                         --attempts;
-                        await context.PostAsync($"I can't see anyone in this photo, Please send me a photo.");
+                        await context.PostAsync($"ออเจ้าไม่ได้ส่งรูปใบหน้าของออเจ้ามา ส่งรูปหน้าออเจ้ามาให้ข้าด้วยเถิด");
                         context.Wait(MessageReceivedAsync);
                     }
                 }
                 else
                 {
                     --attempts;
-                    await context.PostAsync($"I can't read this file, Please send me a photo.");
+                    await context.PostAsync($"ออเจ้าไม่ได้ส่งรูปใบหน้าของออเจ้ามา ส่งรูปหน้าออเจ้ามาให้ข้าด้วยเถิด");
                     context.Wait(MessageReceivedAsync);
                 }
             }
             else
             {
                 --attempts;
-                await context.PostAsync($"Please send me a photo.");
+                await context.PostAsync($"ส่งรูปหน้าออเจ้ามาให้ข้าด้วยเถิด");
                 context.Wait(MessageReceivedAsync);
             }
 
             if (attempts <= 0)
             {
-                context.Fail(new TooManyAttemptsException("Message was not a valid photo."));
+                context.Fail(new TooManyAttemptsException("รูปที่ออเจ้าส่งมาไม่ถูกต้อง"));
             }
         }
 
@@ -100,13 +100,13 @@ namespace SimpleEchoBot.Dialogs
                     case "No":
                         if (this.user.gender == "male")
                         {
-                            this.user.gender = "female";
+                            this.user.gender = "ท่านหมื่น";
                         }
                         else
                         {
-                            this.user.gender = "male";
+                            this.user.gender = "แม่หญิง";
                         }
-                        await context.PostAsync($"I'm sorry with that, i'll remember you are a {this.user.gender}.");
+                        await context.PostAsync($"ข้าเสียใจ ข้าจักจดจำว่าออเจ้าเป็น "+ this.user.gender + " หนา");
                         break;
                 }
 
@@ -117,12 +117,12 @@ namespace SimpleEchoBot.Dialogs
                     this.user.BudgetOption4,
                     this.user.BudgetOption5,
                 };
-                var quiz = $"I want to know your range of budget to buy a new car. (in thai baht)";
-                PromptDialog.Choice(context, this.OnBudgetSelected, options, quiz, "Not a valid option", 3);
+                var quiz = this.user.gender + $" ได้โปรดระบุงบที่ต้องการซื้อรถ ด้วย เถิดหนา/นะเจ้าคะ";
+                PromptDialog.Choice(context, this.OnBudgetSelected, options, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
             }
             catch (TooManyAttemptsException ex)
             {
-                context.Fail(new TooManyAttemptsException("Ooops! Too many attempts :(. But don't worry, I'm handling that exception and you can try again!"));
+                context.Fail(new TooManyAttemptsException($"ข้าเสียใจยิ่ง ระบบขัดข้อง"));
             }
         }
 
@@ -132,13 +132,13 @@ namespace SimpleEchoBot.Dialogs
             {
                 this.user.budget = await result;
 
-                List<string> options = new List<string>() { "Yes", "No" };
-                var quiz = $"Are you married?";
-                PromptDialog.Choice(context, this.OnMarriedSelected, options, quiz, "Not a valid option", 3);
+                List<string> options = new List<string>() { "ใช่", "ไม่" };
+                var quiz = this.user.gender + $" แต่งงานแล้วใช่หรือไม่ /เจ้าคะ";
+                PromptDialog.Choice(context, this.OnMarriedSelected, options, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
             }
             catch (TooManyAttemptsException ex)
             {
-                context.Fail(new TooManyAttemptsException("Ooops! Too many attempts :(. But don't worry, I'm handling that exception and you can try again!"));
+                context.Fail(new TooManyAttemptsException($"ข้าเสียใจยิ่ง ระบบขัดข้อง"));
             }
         }
 
@@ -152,9 +152,9 @@ namespace SimpleEchoBot.Dialogs
                     case "Yes":
                         this.user.married = true;
 
-                        List<string> options = new List<string>() { "Yes", "No" };
-                        var quiz = $"Do you have a kid?";
-                        PromptDialog.Choice(context, this.OnKidsSelected, options, quiz, "Not a valid option", 3);
+                        List<string> options = new List<string>() { "ใช่", "ไม่" };
+                        var quiz = this.user.gender + $" มีลูกแล้วหรือไม่ /เจ้าคะ";
+                        PromptDialog.Choice(context, this.OnKidsSelected, options, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
                         break;
 
                     case "No":
@@ -165,7 +165,7 @@ namespace SimpleEchoBot.Dialogs
             }
             catch (TooManyAttemptsException ex)
             {
-                context.Fail(new TooManyAttemptsException("Ooops! Too many attempts :(. But don't worry, I'm handling that exception and you can try again!"));
+                context.Fail(new TooManyAttemptsException("ข้าเสียใจยิ่ง ระบบขัดข้อง"));
             }
         }
 
@@ -188,7 +188,7 @@ namespace SimpleEchoBot.Dialogs
             }
             catch (TooManyAttemptsException ex)
             {
-                context.Fail(new TooManyAttemptsException("Ooops! Too many attempts :(. But don't worry, I'm handling that exception and you can try again!"));
+                context.Fail(new TooManyAttemptsException("ข้าเสียใจยิ่ง ระบบขัดข้อง"));
             }
         }
     }
