@@ -34,33 +34,36 @@ namespace SimpleEchoBot.Dialogs
                 new HeroCard
                 {
                     Title = this.user.suggestCar,
-                    Text = $"I suggest a {this.user.suggestCar} for you.",
+                    //Text = $"I suggest a {this.user.suggestCar} for you.",
+                    Text = $"จากข้อมูลของ{this.user.genderThai} และรูปถ่ายที่ได้ ออเจ้าเป็น {this.user.genderThai} อายุ {this.user.age} ปี ชอบการแต่งตัว รักความสนุกสนาน รถยนต์ที่เหมาะกับออเจ้าที่สุดคือ {this.user.suggestCar}",
                     Images = new List<CardImage> { new CardImage(this.user.suggestImage) },
-                    Buttons = new List<CardAction> { new CardAction(ActionTypes.OpenUrl, "Information", value: this.user.suggestUrl) }
+                    Buttons = new List<CardAction> { new CardAction(ActionTypes.OpenUrl, "ข้อมูล", value: this.user.suggestUrl) }
                 }.ToAttachment()
             };
             await context.PostAsync(message);
 
-            List<string> options = new List<string>() { "Yes", "No" };
-            var quiz = $"Do you like this car?";
-            PromptDialog.Choice(context, this.OnLikeSelected, options, quiz, "Not a valid option", 3);
+            List<string> options = new List<string>() { "ใช่", "ไม่" };
+            //var quiz = $"Do you like this car?";
+            var quiz = $"{this.user.genderThai} ชอบรถคันนี้หรือไม่เจ้าคะ (หากไม่ ข้าจักแนะนำรถที่ใกล้เคียงแก่{this.user.genderThai}หนา)";
+            PromptDialog.Choice(context, this.OnLikeSelected, options, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
         }
 
         private async Task OnLikeSelected(IDialogContext context, IAwaitable<string> result)
         {
             try
             {
-                List<string> options = new List<string>() { "Yes", "No" };
+                List<string> options = new List<string>() { "ใช่", "ไม่" };
                 var quiz = "";
                 string optionSelected = await result;
                 switch (optionSelected)
                 {
-                    case "Yes":
-                        quiz = $"Glad to hear That, we offer an attractive discounts on exchange or Sell-in of Used Cars. Do you want to available the service?";
-                        PromptDialog.Choice(context, this.OnSellInSelected, options, quiz, "Not a valid option", 3);
+                    case "ใช่":
+                        //quiz = $"Glad to hear That, we offer an attractive discounts on exchange or Sell-in of Used Cars. Do you want to available the service?";
+                        quiz = $"ข้ายินดียิ่งนักที่{this.user.genderThai}สนใจรถของข้า ข้ามีโปรโมชั่นพิเศษ รถเก่าแลกรถใหม่ {this.user.genderThai}สนใจข้อเสนอพิเศษนี้หรือไม่";
+                        PromptDialog.Choice(context, this.OnSellInSelected, options, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
                         break;
 
-                    case "No":
+                    case "ไม่":
                         --likeAttemps;
                         if (likeAttemps > 0)
                         {
@@ -70,19 +73,19 @@ namespace SimpleEchoBot.Dialogs
                                 new HeroCard
                                 {
                                     Title = this.user.suggestCar,
-                                    Text = $"I suggest a {this.user.suggestCar2} for you.",
+                                    Text = $"จากข้อมูลของ{this.user.genderThai} และรูปถ่ายที่ได้ ออเจ้าเป็น{this.user.genderThai} อายุ {this.user.age} ปี ชอบการแต่งตัว รักความสนุกสนาน รถยนต์ที่เหมาะกับออเจ้าที่สุดคือ {this.user.suggestCar}",
                                     Images = new List<CardImage> { new CardImage(this.user.suggestImage2) },
-                                    Buttons = new List<CardAction> { new CardAction(ActionTypes.OpenUrl, "Information", value: this.user.suggestUrl2) }
+                                    Buttons = new List<CardAction> { new CardAction(ActionTypes.OpenUrl, "ข้อมูล", value: this.user.suggestUrl2) }
                                 }.ToAttachment()
                             };
                             await context.PostAsync(message);
 
-                            quiz = $"How about this car?";
-                            PromptDialog.Choice(context, this.OnLikeSelected, options, quiz, "Not a valid option", 3);
+                            quiz = $"{this.user.genderThai}ชอบรถคันนี้หรือไม่ /เจ้าคะ";
+                            PromptDialog.Choice(context, this.OnLikeSelected, options, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
                         }
                         else
                         {
-                            await context.PostAsync($"You can send me a picture of car that you like, And I'll suggest a car that similar to that car.");
+                            await context.PostAsync($"หาก{this.user.genderThai}มีรถคันโปรด ได้โปรดนำรูปรถส่งมาให้ข้าเถิดเจ้าค่ะ");
                             context.Wait(CarPhotoReceivedAsync);
                         }
                         break;
@@ -90,7 +93,7 @@ namespace SimpleEchoBot.Dialogs
             }
             catch (TooManyAttemptsException ex)
             {
-                context.Fail(new TooManyAttemptsException("Ooops! Too many attempts :(. But don't worry, I'm handling that exception and you can try again!"));
+                context.Fail(new TooManyAttemptsException("ข้าเสียใจยิ่ง ระบบขัดข้อง ลองเริ่มกันใหม่นะเจ้าคะ"));
             }
         }
 
@@ -98,25 +101,25 @@ namespace SimpleEchoBot.Dialogs
         {
             try
             {
-                List<string> options = new List<string>() { "Yes", "No" };
+                List<string> options = new List<string>() { "ใช่", "ไม่" };
                 var quiz = "";
                 string optionSelected = await result;
                 switch (optionSelected)
                 {
-                    case "Yes":
-                        await context.PostAsync("Please Enter the Model and Series of car (e.g. 'Honda Jazz').");
+                    case "ใช่":
+                        await context.PostAsync($"ระบุรุ่นรถของ{this.user.genderThai}ด้วยเถิดหนา (เช่น 'Honda Jazz')");
                         context.Wait(this.ModelReceivedAsync);
                         break;
 
-                    case "No":
-                        quiz = $"Can you provide your mobile number to me? I have a sales team that can offer a promotion about this car.";
-                        PromptDialog.Choice(context, this.OnMobileSelected, options, quiz, "Not a valid option", 3);
+                    case "ไม่":
+                        quiz = $"ข้าขอเบอร์โทรติดต่อของ{this.user.genderThai}ได้หรือไม่ ข้าจักให้คนของข้าติดต่อกลับไป พร้อมกับข้อเสนอที่น่าสนใจโดยเร็ว";
+                        PromptDialog.Choice(context, this.OnMobileSelected, options, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
                         break;
                 }
             }
             catch (TooManyAttemptsException ex)
             {
-                context.Fail(new TooManyAttemptsException("Ooops! Too many attempts :(. But don't worry, I'm handling that exception and you can try again!"));
+                context.Fail(new TooManyAttemptsException("ข้าเสียใจยิ่ง ระบบขัดข้อง ลองเริ่มกันใหม่นะเจ้าคะ"));
             }
         }
 
@@ -205,7 +208,7 @@ namespace SimpleEchoBot.Dialogs
 
             if (found)
             {
-                await context.PostAsync($"Please Enter The year of purchase.");
+                await context.PostAsync($"ระบุปีที่ซื้อรถคันเก่าของ{this.user.genderThai}ด้วยเถิด");
                 context.Wait(this.YearReceivedAsync);
             }
             else
@@ -213,13 +216,13 @@ namespace SimpleEchoBot.Dialogs
                 --modelAttempts;
                 if (modelAttempts > 0)
                 {
-                    await context.PostAsync("I'm sorry, I don't understand your reply. What is your Honda car (e.g. 'Honda Jazz')?");
+                    await context.PostAsync($"ข้าไม่เข้าใจ โปรดระบุรุ่นรถของ{this.user.genderThai}ด้วยเถิดหนา (เช่น 'Honda Jazz')");
 
                     context.Wait(this.ModelReceivedAsync);
                 }
                 else
                 {
-                    context.Fail(new TooManyAttemptsException("Message was not a Honda car."));
+                    context.Fail(new TooManyAttemptsException("ข้อความที่ออเจ้าส่งมาไม่ใช่รถของ Honda นะเจ้าคะ"));
                 }
             }
         }
@@ -240,22 +243,22 @@ namespace SimpleEchoBot.Dialogs
 
                 var sellInPriceStr = this.user.sellInPrice.ToString("#,##0.00");
 
-                List<string> options = new List<string>() { "Yes", "No" };
-                var quiz = $"The best price for this car is {sellInPriceStr} B. Subjected to go up or down based on further details. Do you want to include this in your offer?";
-                PromptDialog.Choice(context, this.OnSellInConfirmSelected, options, quiz, "Not a valid option", 3);
+                List<string> options = new List<string>() { "ใช่", "ไม่" };
+                var quiz = $"ราคาที่เหมาะสมกับรถของ{this.user.genderThai} คือ {sellInPriceStr} บาท ราคานี้สามารถเพิ่มหรือลดลงตามข้อมูลที่ได้จาก{this.user.genderThai}เพิ่มเติม ออเจ้าสนใจข้อเสนอนี้หรือไม่ ";
+                PromptDialog.Choice(context, this.OnSellInConfirmSelected, options, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
             }
             else
             {
                 --yearAttempts;
                 if (yearAttempts > 0)
                 {
-                    await context.PostAsync($"I'm sorry, I don't understand your reply. Please Enter The year of purchase (from {oldestYear} to {curYear}).");
+                    await context.PostAsync($"ข้าไม่เข้าใจ โปรดระบุปีที่ซื้อรถคันเก่าของ{this.user.genderThai}ด้วยเถิด (ตั้งแต่ {oldestYear} ถึง {curYear}).");
 
                     context.Wait(this.YearReceivedAsync);
                 }
                 else
                 {
-                    context.Fail(new TooManyAttemptsException("Message was not a mobile number."));
+                    context.Fail(new TooManyAttemptsException("ข้อความที่ออเจ้าส่งมาไม่ใช่ปีที่ถูกต้องนะเจ้าคะ"));
                 }
             }
         }
@@ -264,25 +267,25 @@ namespace SimpleEchoBot.Dialogs
         {
             try
             {
-                List<string> options = new List<string>() { "Yes", "No" };
+                List<string> options = new List<string>() { "ใช่", "ไม่" };
                 var quiz = "";
                 string optionSelected = await result;
                 switch (optionSelected)
                 {
-                    case "Yes":
-                        await context.PostAsync("Please provide your mobile number to me, I have a sales team that can offer a promotion about this car.");
+                    case "ใช่":
+                        await context.PostAsync($"ข้าขอเบอร์โทรติดต่อของ{this.user.genderThai}ด้วยนะเจ้าคะ ข้าจักให้คนของข้าติดต่อกลับไป พร้อมกับข้อเสนอที่น่าสนใจโดยเร็ว (เช่น ‘0891234567’)");
                         context.Wait(this.MobileReceivedAsync);
                         break;
 
-                    case "No":
-                        quiz = $"Can you provide your mobile number to me? I have a sales team that can offer a promotion about this car.";
-                        PromptDialog.Choice(context, this.OnMobileSelected, options, quiz, "Not a valid option", 3);
+                    case "ไม่":
+                        quiz = $"ข้าขอเบอร์โทรติดต่อของ{this.user.genderThai}ได้หรือไม่ ข้าจักให้คนของข้าติดต่อกลับไป พร้อมกับข้อเสนอที่น่าสนใจโดยเร็ว";
+                        PromptDialog.Choice(context, this.OnMobileSelected, options, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
                         break;
                 }
             }
             catch (TooManyAttemptsException ex)
             {
-                context.Fail(new TooManyAttemptsException("Ooops! Too many attempts :(. But don't worry, I'm handling that exception and you can try again!"));
+                context.Fail(new TooManyAttemptsException("ข้าเสียใจยิ่ง ระบบขัดข้อง ลองเริ่มกันใหม่นะเจ้าคะ"));
             }
         }
 
@@ -293,20 +296,20 @@ namespace SimpleEchoBot.Dialogs
                 string optionSelected = await result;
                 switch (optionSelected)
                 {
-                    case "Yes":
-                        await context.PostAsync("What is your mobile number (e.g. '0891234567')?");
+                    case "ใช่":
+                        await context.PostAsync($"เบอร์โทรของ{this.user.genderThai} เบอร์อะไรเจ้าคะ (เช่น '0891234567')?");
                         context.Wait(this.MobileReceivedAsync);
                         break;
 
-                    case "No":
-                        await context.PostAsync($"Oh, I'm sorry to hear that. You can chat to me again anytime.");
+                    case "ไม่":
+                        await context.PostAsync($"ข้าเสียใจยิ่ง แต่ถึงอย่างไรออเจ้าคุยกับข้าได้ทุกเมื่อหนา");
                         context.Done(this.user);
                         break;
                 }
             }
             catch (TooManyAttemptsException ex)
             {
-                context.Fail(new TooManyAttemptsException("Ooops! Too many attempts :(. But don't worry, I'm handling that exception and you can try again!"));
+                context.Fail(new TooManyAttemptsException("ข้าเสียใจยิ่ง ระบบขัดข้อง ลองเริ่มกันใหม่นะเจ้าคะ"));
             }
         }
 
@@ -316,7 +319,7 @@ namespace SimpleEchoBot.Dialogs
 
             if (message.Text != null && Regex.IsMatch(message.Text.Trim(), @"\+?[0-9]{10}"))
             {
-                await context.PostAsync($"Thanks for your time. Our sales team will call you ASAP.");
+                await context.PostAsync($"ขอบน้ำใจที่{this.user.genderThai}สละเวลาให้กับข้า {this.user.genderThai}สามารถติดต่อข้าได้ทุกเวลาหนา");
                 context.Done(this.user);
             }
             else
@@ -324,13 +327,13 @@ namespace SimpleEchoBot.Dialogs
                 --mobileAttempts;
                 if (mobileAttempts > 0)
                 {
-                    await context.PostAsync("I'm sorry, I don't understand your reply. What is your mobile number (e.g. '0891234567')?");
+                    await context.PostAsync($"ข้าไม่เข้าใจ เบอร์โทรของ{this.user.genderThai} เบอร์อะไรเจ้าคะ (เช่น '0891234567')?");
 
                     context.Wait(this.MobileReceivedAsync);
                 }
                 else
                 {
-                    context.Fail(new TooManyAttemptsException("Message was not a mobile number."));
+                    context.Fail(new TooManyAttemptsException("ข้อความที่ออเจ้าส่งมาไม่ใช่เบอร์โทรที่ถูกต้องนะเจ้าคะ"));
                 }
             }
         }
@@ -385,16 +388,16 @@ namespace SimpleEchoBot.Dialogs
                                     new HeroCard
                                     {
                                         Title = this.user.suggestCar,
-                                        Text = $"This look like a {this.user.suggestCar3}.",
+                                        Text = $"จากรูปรถของ{this.user.genderThai} รถยนต์ที่เหมาะสมและใกล้เคียงกับความต้องการของ{this.user.genderThai} คือ {this.user.suggestCar3} ออเจ้าชอบรถยนต์คันนี้หรือไม่",
                                         Images = new List<CardImage> { new CardImage(this.user.suggestImage3) },
-                                        Buttons = new List<CardAction> { new CardAction(ActionTypes.OpenUrl, "Information", value: this.user.suggestUrl3) }
+                                        Buttons = new List<CardAction> { new CardAction(ActionTypes.OpenUrl, "ข้อมูล", value: this.user.suggestUrl3) }
                                     }.ToAttachment()
                                 };
                                 await context.PostAsync(outMessage);
 
-                                List<string> options = new List<string>() { "Yes", "No" };
-                                var quiz = $"Glad to hear That, we offer an attractive discounts on exchange or Sell-in of Used Cars. Do you want to available the service?";
-                                PromptDialog.Choice(context, this.OnSellInSelected, options, quiz, "Not a valid option", 3);
+                                List<string> options = new List<string>() { "ใช่", "ไม่" };
+                                var quiz = $"ข้ามีโปรโมชั่นพิเศษ รถเก่าแลกรถใหม่ {this.user.genderThai}สนใจข้อเสนอพิเศษนี้หรือไม่";
+                                PromptDialog.Choice(context, this.OnSellInSelected, options, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
 
                                 break;
                             }
@@ -402,19 +405,19 @@ namespace SimpleEchoBot.Dialogs
                     }
                     else
                     {
-                        await context.PostAsync($"I think this is not a car. Please send me a car photo.");
+                        await context.PostAsync($"ข้าว่านี่ไม่ใช่รถนะเจ้าคะ โปรดส่งรูปรถให้ข้าเถิดเจ้าค่ะ");
                         context.Wait(CarPhotoReceivedAsync);
                     }
                 }
                 else
                 {
-                    await context.PostAsync($"I don't understand this file. Please send me a car photo.");
+                    await context.PostAsync($"ข้าว่านี่ไม่ใช่รูปนะเจ้าคะ โปรดส่งรูปรถให้ข้าเถิดเจ้าค่ะ");
                     context.Wait(CarPhotoReceivedAsync);
                 }
             }
             else
             {
-                await context.PostAsync($"I didn't see any photo.");
+                await context.PostAsync($"ข้าไม่เห็นรูปอะไรเลยเจ้าค่ะ");
                 context.Wait(CarPhotoReceivedAsync);
             }
         }
