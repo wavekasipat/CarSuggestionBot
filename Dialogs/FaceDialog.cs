@@ -47,6 +47,15 @@ namespace SimpleEchoBot.Dialogs
                         this.user.gender = face["faceAttributes"]["gender"].ToString();
                         this.user.age = decimal.Parse(face["faceAttributes"]["age"].ToString());
 
+                        if (this.user.gender == "male")
+                        {
+                            this.user.genderThai = "ท่านหมื่น";
+                        }
+                        else
+                        {
+                            this.user.genderThai = "แม่หญิง";
+                        }
+
                         List<string> options = new List<string>() { "Yes", "No" };
                         var quiz = $"Oh, I see you. You are a {this.user.gender} right?";
                         PromptDialog.Choice(context, this.OnGenderSelected, options, quiz, "Not a valid option", 3);
