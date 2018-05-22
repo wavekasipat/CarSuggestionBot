@@ -39,30 +39,30 @@ namespace SimpleEchoBot.Dialogs
                 {
                     var contentStream = await ImageStream.GetImageStream(attachment.ContentUrl);
 
-                    JArray json = await FaceAPI.GetFaceAPIJson(contentStream);
+                    dynamic json = await FaceAPI.GetFaceAPIJson(contentStream);
 
                     if (json.Count > 0)
                     {
-                        var face = json[0];
-                        this.user.gender = face["faceAttributes"]["gender"].ToString();
-                        this.user.age = decimal.Parse(face["faceAttributes"]["age"].ToString());
+                        var face = json[0]["faceAttributes"];
+                        this.user.gender = face["gender"].ToString();
+                        this.user.age = decimal.Parse(face["age"].ToString());
 
-                        this.user.smile = double.Parse(face["faceAttributes"]["smile"].ToString());
-                        this.user.glasses = face["faceAttributes"]["glasses"].ToString();
-                        this.user.anger = double.Parse(face["faceAttributes"]["emotion"]["anger"].ToString());
-                        this.user.eyeMakeup = Convert.ToBoolean(face["faceAttributes"]["makeup"]["eyeMakeup"].ToString());
-                        this.user.lipMakeup = Convert.ToBoolean(face["faceAttributes"]["makeup"]["lipMakeup"].ToString());
+                        this.user.smile = double.Parse(face["smile"].ToString());
+                        this.user.glasses = face["glasses"].ToString();
+                        this.user.anger = double.Parse(face["emotion"]["anger"].ToString());
+                        this.user.eyeMakeup = Convert.ToBoolean(face["makeup"]["eyeMakeup"].ToString());
+                        this.user.lipMakeup = Convert.ToBoolean(face["makeup"]["lipMakeup"].ToString());
 
-                        this.user.hair = face["faceAttributes"]["hair"].ToString();
-                        this.user.bald = double.Parse(face["faceAttributes"]["smile"].ToString());
-                        //var hairColor = face["faceAttributes"]["hairColor"].ToObject<List<JObject>>(); ;
-                        //if (hairColor.Count > 0)
-                        //{
-                        //    this.user.hairColor = hairColor[0]["color"].ToString();
-                        //}
-                        this.user.moustache = double.Parse(face["faceAttributes"]["facialHair"]["moustache"].ToString());
-                        this.user.beard = double.Parse(face["faceAttributes"]["facialHair"]["beard"].ToString());
-                        this.user.emotion = face["faceAttributes"]["emotion"].ToString();
+                        this.user.hair = face["hair"].ToString();
+                        this.user.bald = double.Parse(face["smile"].ToString());
+                        var hairColor = face["hair"]["hairColor"];
+                        if (hairColor.Count > 0)
+                        {
+                            this.user.hairColor = hairColor[0]["color"].ToString();
+                        }
+                        this.user.moustache = double.Parse(face["facialHair"]["moustache"].ToString());
+                        this.user.beard = double.Parse(face["facialHair"]["beard"].ToString());
+                        this.user.emotion = face["emotion"].ToString();
 
                         if (this.user.gender == "male")
                         {
