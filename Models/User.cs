@@ -17,6 +17,7 @@ namespace SimpleEchoBot.Models
         public decimal happiness { get; set; }
         public Boolean eyeMakeup { get; set; }
         public Boolean lipMakeup { get; set; }
+        public string glasses { get; set; }
 
 
         public string BudgetOption1 { get; set; }
