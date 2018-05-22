@@ -1,4 +1,4 @@
-using Microsoft.Bot.Builder.Dialogs;
+﻿using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 using SimpleEchoBot.Dialogs;
 using SimpleEchoBot.Models;
@@ -27,7 +27,8 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
 
         private async Task SendWelcomeMessageAsync(IDialogContext context)
         {
-            PromptDialog.Choice(context, this.OnOptionSelected, new List<string>() { "Yes", "No" }, "Hi, Do you want to know which car model will suit your life style? ", "Not a valid option", 3);
+            //PromptDialog.Choice(context, this.OnOptionSelected, new List<string>() { "Yes", "No" }, "Hi, Do you want to know which car model will suit your life style? ", "Not a valid option", 3);
+            PromptDialog.Choice(context, this.OnOptionSelected, new List<string>() { "ใช่", "ไม่" }, "สวัสดีออเจ้า ออเจ้าอยากให้ข้าแนะนำรุ่นรถยนต์ที่เหมาะกับออเจ้าหรือไม่?", "ออเจ้าเลือกไม่ถูกต้อง", 3);
         }
 
         private async Task OnOptionSelected(IDialogContext context, IAwaitable<string> result)
@@ -38,19 +39,23 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
 
                 switch (optionSelected)
                 {
-                    case "Yes":
+                    //case "Yes":
+                    case "ใช่":
                         context.Call(new FaceDialog(this.user), this.FaceDialogResumeAfter);
                         break;
 
-                    case "No":
-                        await context.PostAsync($"Oh, I'm sorry to hear that. You can chat to me again anytime.");
+                    //case "No":
+                    case "ไม่":
+                        //await context.PostAsync($"Oh, I'm sorry to hear that. You can chat to me again anytime.");
+                        await context.PostAsync($"ข้าเสียใจยิ่ง แต่ถึงอย่างไรออเจ้าคุยกับข้าได้ทุกเมื่อหนา");
                         context.Wait(this.MessageReceivedAsync);
                         break;
                 }
             }
             catch (TooManyAttemptsException ex)
             {
-                await context.PostAsync($"Ooops! Too many attempts :(. But don't worry, I'm handling that exception and you can try again!");
+                //await context.PostAsync($"Ooops! Too many attempts :(. But don't worry, I'm handling that exception and you can try again!");
+                await context.PostAsync($"ข้าเสียใจยิ่ง ระบบขัดข้อง");
                 context.Wait(this.MessageReceivedAsync);
             }
         }
@@ -64,7 +69,8 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
             }
             catch (TooManyAttemptsException)
             {
-                await context.PostAsync("I'm sorry, I'm having issues understanding you. Let's try again.");
+                //await context.PostAsync("I'm sorry, I'm having issues understanding you. Let's try again.");
+                await context.PostAsync("ข้าเสียใจยิ่ง ข้าไม่เข้าใจ");
                 await this.SendWelcomeMessageAsync(context);
             }
         }
@@ -78,7 +84,8 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
             }
             catch (TooManyAttemptsException)
             {
-                await context.PostAsync("I'm sorry, I'm having issues understanding you. Let's try again.");
+                //await context.PostAsync("I'm sorry, I'm having issues understanding you. Let's try again.");
+                await context.PostAsync("ข้าเสียใจยิ่ง ข้าไม่เข้าใจ");
                 await this.SendWelcomeMessageAsync(context);
             }
         }
