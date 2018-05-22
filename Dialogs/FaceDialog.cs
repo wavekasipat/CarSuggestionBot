@@ -155,7 +155,7 @@ namespace SimpleEchoBot.Dialogs
                         this.user.married = true;
 
                         List<string> options = new List<string>() { "ใช่", "ไม่" };
-                        var quiz = $"{this.user.genderThai}ออเจ้ามีลูกหรือไม่เจ้าคะ";
+                        var quiz = $"{this.user.genderThai}มีลูกหรือไม่เจ้าคะ";
                         PromptDialog.Choice(context, this.OnKidsSelected, options, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
                         break;
 

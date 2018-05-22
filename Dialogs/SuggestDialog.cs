@@ -73,14 +73,14 @@ namespace SimpleEchoBot.Dialogs
                                 new HeroCard
                                 {
                                     Title = this.user.suggestCar,
-                                    Text = $"จากข้อมูลของ{this.user.genderThai} และรูปถ่ายที่ได้ ออเจ้าเป็น{this.user.genderThai} อายุ {this.user.age} ปี ชอบการแต่งตัว รักความสนุกสนาน รถยนต์ที่เหมาะกับออเจ้าที่สุดคือ {this.user.suggestCar}",
+                                    Text = $"คันนี้ล่ะเจ้าคะ",
                                     Images = new List<CardImage> { new CardImage(this.user.suggestImage2) },
                                     Buttons = new List<CardAction> { new CardAction(ActionTypes.OpenUrl, "ข้อมูล", value: this.user.suggestUrl2) }
                                 }.ToAttachment()
                             };
                             await context.PostAsync(message);
 
-                            quiz = $"{this.user.genderThai}ชอบรถคันนี้หรือไม่ /เจ้าคะ";
+                            quiz = $"{this.user.genderThai}ชอบรถคันนี้หรือไม่เจ้าคะ";
                             PromptDialog.Choice(context, this.OnLikeSelected, options, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
                         }
                         else
@@ -388,7 +388,7 @@ namespace SimpleEchoBot.Dialogs
                                     new HeroCard
                                     {
                                         Title = this.user.suggestCar,
-                                        Text = $"จากรูปรถของ{this.user.genderThai} รถยนต์ที่เหมาะสมและใกล้เคียงกับความต้องการของ{this.user.genderThai} คือ {this.user.suggestCar3} ออเจ้าชอบรถยนต์คันนี้หรือไม่",
+                                        Text = $"จากรูปรถของ{this.user.genderThai} รถยนต์ที่เหมาะสมและใกล้เคียงกับความต้องการของ{this.user.genderThai} คือ {this.user.suggestCar3}",
                                         Images = new List<CardImage> { new CardImage(this.user.suggestImage3) },
                                         Buttons = new List<CardAction> { new CardAction(ActionTypes.OpenUrl, "ข้อมูล", value: this.user.suggestUrl3) }
                                     }.ToAttachment()
