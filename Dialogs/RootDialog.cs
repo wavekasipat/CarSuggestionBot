@@ -55,7 +55,7 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
             catch (TooManyAttemptsException ex)
             {
                 //await context.PostAsync($"Ooops! Too many attempts :(. But don't worry, I'm handling that exception and you can try again!");
-                await context.PostAsync($"ข้าเสียใจยิ่ง ระบบขัดข้อง");
+                await context.PostAsync($"ข้าเสียใจยิ่ง ระบบขัดข้อง ลองเริ่มกันใหม่นะเจ้าคะ");
                 context.Wait(this.MessageReceivedAsync);
             }
         }
@@ -70,7 +70,7 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
             catch (TooManyAttemptsException)
             {
                 //await context.PostAsync("I'm sorry, I'm having issues understanding you. Let's try again.");
-                await context.PostAsync("ข้าเสียใจยิ่ง ข้าไม่เข้าใจ");
+                await context.PostAsync("ข้าเสียใจยิ่ง ข้าไม่เข้าใจ ลองเริ่มกันใหม่นะเจ้าคะ");
                 await this.SendWelcomeMessageAsync(context);
             }
         }
@@ -85,7 +85,7 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
             catch (TooManyAttemptsException)
             {
                 //await context.PostAsync("I'm sorry, I'm having issues understanding you. Let's try again.");
-                await context.PostAsync("ข้าเสียใจยิ่ง ข้าไม่เข้าใจ");
+                await context.PostAsync("ข้าเสียใจยิ่ง ข้าไม่เข้าใจ ลองเริ่มกันใหม่นะเจ้าคะ");
                 await this.SendWelcomeMessageAsync(context);
             }
         }

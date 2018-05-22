@@ -19,6 +19,13 @@ namespace SimpleEchoBot.Models
         public Boolean lipMakeup { get; set; }
         public string glasses { get; set; }
 
+        public string hair { get; set; }
+        public double bald { get; set; }
+        public string hairColor { get; set; }
+        public double moustache { get; set; }
+        public double beard { get; set; }
+        public string emotion { get; set; }
+
         public string makeupStr { get; set; }
         public string smileStr { get; set; }
         public string angerStr { get; set; }

@@ -48,10 +48,21 @@ namespace SimpleEchoBot.Dialogs
                         this.user.age = decimal.Parse(face["faceAttributes"]["age"].ToString());
 
                         this.user.smile = double.Parse(face["faceAttributes"]["smile"].ToString());
-                        this.user.glasses = face["faceAttributes"]["gender"].ToString();
+                        this.user.glasses = face["faceAttributes"]["glasses"].ToString();
                         this.user.anger = double.Parse(face["faceAttributes"]["emotion"]["anger"].ToString());
                         this.user.eyeMakeup = Convert.ToBoolean(face["faceAttributes"]["makeup"]["eyeMakeup"].ToString());
                         this.user.lipMakeup = Convert.ToBoolean(face["faceAttributes"]["makeup"]["lipMakeup"].ToString());
+
+                        this.user.hair = face["faceAttributes"]["hair"].ToString();
+                        this.user.bald = double.Parse(face["faceAttributes"]["smile"].ToString());
+                        //var hairColor = face["faceAttributes"]["hairColor"].ToObject<List<JObject>>(); ;
+                        //if (hairColor.Count > 0)
+                        //{
+                        //    this.user.hairColor = hairColor[0]["color"].ToString();
+                        //}
+                        this.user.moustache = double.Parse(face["faceAttributes"]["facialHair"]["moustache"].ToString());
+                        this.user.beard = double.Parse(face["faceAttributes"]["facialHair"]["beard"].ToString());
+                        this.user.emotion = face["faceAttributes"]["emotion"].ToString();
 
                         if (this.user.gender == "male")
                         {

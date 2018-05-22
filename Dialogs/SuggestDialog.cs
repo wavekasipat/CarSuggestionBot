@@ -112,8 +112,10 @@ namespace SimpleEchoBot.Dialogs
                         break;
 
                     case "ไม่":
-                        quiz = $"ข้าขอเบอร์โทรติดต่อของ{this.user.genderThai}ได้หรือไม่ ข้าจักให้คนของข้าติดต่อกลับไป พร้อมกับข้อเสนอที่น่าสนใจโดยเร็ว";
-                        PromptDialog.Choice(context, this.OnMobileSelected, options, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
+                        //quiz = $"ข้าขอเบอร์โทรติดต่อของ{this.user.genderThai}ได้หรือไม่ ข้าจักให้คนของข้าติดต่อกลับไป พร้อมกับข้อเสนอที่น่าสนใจโดยเร็ว";
+                        //PromptDialog.Choice(context, this.OnMobileSelected, options, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
+                        await context.PostAsync($"ข้าขอเบอร์โทรติดต่อของ{this.user.genderThai}ด้วยนะเจ้าคะ ข้าจักให้คนของข้าติดต่อกลับไป พร้อมกับข้อเสนอที่น่าสนใจโดยเร็ว (เช่น ‘0891234567’)");
+                        context.Wait(this.MobileReceivedAsync);
                         break;
                 }
             }
@@ -270,18 +272,21 @@ namespace SimpleEchoBot.Dialogs
                 List<string> options = new List<string>() { "ใช่", "ไม่" };
                 var quiz = "";
                 string optionSelected = await result;
-                switch (optionSelected)
-                {
-                    case "ใช่":
-                        await context.PostAsync($"ข้าขอเบอร์โทรติดต่อของ{this.user.genderThai}ด้วยนะเจ้าคะ ข้าจักให้คนของข้าติดต่อกลับไป พร้อมกับข้อเสนอที่น่าสนใจโดยเร็ว (เช่น ‘0891234567’)");
-                        context.Wait(this.MobileReceivedAsync);
-                        break;
+                //switch (optionSelected)
+                //{
+                //    case "ใช่":
+                //        await context.PostAsync($"ข้าขอเบอร์โทรติดต่อของ{this.user.genderThai}ด้วยนะเจ้าคะ ข้าจักให้คนของข้าติดต่อกลับไป พร้อมกับข้อเสนอที่น่าสนใจโดยเร็ว (เช่น ‘0891234567’)");
+                //        context.Wait(this.MobileReceivedAsync);
+                //        break;
 
-                    case "ไม่":
-                        quiz = $"ข้าขอเบอร์โทรติดต่อของ{this.user.genderThai}ได้หรือไม่ ข้าจักให้คนของข้าติดต่อกลับไป พร้อมกับข้อเสนอที่น่าสนใจโดยเร็ว";
-                        PromptDialog.Choice(context, this.OnMobileSelected, options, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
-                        break;
-                }
+                //    case "ไม่":
+                //        quiz = $"ข้าขอเบอร์โทรติดต่อของ{this.user.genderThai}ได้หรือไม่ ข้าจักให้คนของข้าติดต่อกลับไป พร้อมกับข้อเสนอที่น่าสนใจโดยเร็ว";
+                //        PromptDialog.Choice(context, this.OnMobileSelected, options, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
+                //        break;
+                //}
+
+                await context.PostAsync($"ข้าขอเบอร์โทรติดต่อของ{this.user.genderThai}ด้วยนะเจ้าคะ ข้าจักให้คนของข้าติดต่อกลับไป พร้อมกับข้อเสนอที่น่าสนใจโดยเร็ว (เช่น ‘0891234567’)");
+                context.Wait(this.MobileReceivedAsync);
             }
             catch (TooManyAttemptsException ex)
             {
@@ -289,29 +294,29 @@ namespace SimpleEchoBot.Dialogs
             }
         }
 
-        private async Task OnMobileSelected(IDialogContext context, IAwaitable<string> result)
-        {
-            try
-            {
-                string optionSelected = await result;
-                switch (optionSelected)
-                {
-                    case "ใช่":
-                        await context.PostAsync($"เบอร์โทรของ{this.user.genderThai} เบอร์อะไรเจ้าคะ (เช่น '0891234567')?");
-                        context.Wait(this.MobileReceivedAsync);
-                        break;
+        //private async Task OnMobileSelected(IDialogContext context, IAwaitable<string> result)
+        //{
+        //    try
+        //    {
+        //        string optionSelected = await result;
+        //        switch (optionSelected)
+        //        {
+        //            case "ใช่":
+        //                await context.PostAsync($"เบอร์โทรของ{this.user.genderThai} เบอร์อะไรเจ้าคะ (เช่น '0891234567')?");
+        //                context.Wait(this.MobileReceivedAsync);
+        //                break;
 
-                    case "ไม่":
-                        await context.PostAsync($"ข้าเสียใจยิ่ง แต่ถึงอย่างไรออเจ้าคุยกับข้าได้ทุกเมื่อหนา");
-                        context.Done(this.user);
-                        break;
-                }
-            }
-            catch (TooManyAttemptsException ex)
-            {
-                context.Fail(new TooManyAttemptsException("ข้าเสียใจยิ่ง ระบบขัดข้อง ลองเริ่มกันใหม่นะเจ้าคะ"));
-            }
-        }
+        //            case "ไม่":
+        //                await context.PostAsync($"ข้าเสียใจยิ่ง แต่ถึงอย่างไรออเจ้าคุยกับข้าได้ทุกเมื่อหนา");
+        //                context.Done(this.user);
+        //                break;
+        //        }
+        //    }
+        //    catch (TooManyAttemptsException ex)
+        //    {
+        //        context.Fail(new TooManyAttemptsException("ข้าเสียใจยิ่ง ระบบขัดข้อง ลองเริ่มกันใหม่นะเจ้าคะ"));
+        //    }
+        //}
 
         private async Task MobileReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
@@ -319,7 +324,42 @@ namespace SimpleEchoBot.Dialogs
 
             if (message.Text != null && Regex.IsMatch(message.Text.Trim(), @"\+?[0-9]{10}"))
             {
-                await context.PostAsync($"ขอบน้ำใจที่{this.user.genderThai}สละเวลาให้กับข้า {this.user.genderThai}สามารถติดต่อข้าได้ทุกเวลาหนา");
+                await context.PostAsync($"ข้าขอชื่อของ{this.user.genderThai}ด้วยเถิดหนา");
+                context.Wait(this.NameReceivedAsync);
+            }
+            else
+            {
+                --mobileAttempts;
+                if (mobileAttempts > 0)
+                {
+                    await context.PostAsync($"ข้าไม่เข้าใจ เบอร์โทรของ{this.user.genderThai} เบอร์อะไรเจ้าคะ (เช่น '0891234567')");
+                    context.Wait(this.MobileReceivedAsync);
+                }
+                else
+                {
+                    context.Fail(new TooManyAttemptsException("ข้อความที่ออเจ้าส่งมาไม่ใช่เบอร์โทรที่ถูกต้องนะเจ้าคะ"));
+                }
+            }
+        }
+
+        private async Task NameReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
+        {
+            var message = await result;
+
+            if (message.Text != null)
+            {
+                await context.PostAsync($"ขอบน้ำใจ{this.user.genderThai} ที่สละเวลาให้กับข้า {this.user.genderThai}สามารถติดต่อข้าได้ทุกเวลาหนา");
+                await context.PostAsync($"เฉลยนะออเจ้า จากรูปถ่ายใบหน้าของออเจ้า ข้าสามารถรู้ข้อมูลออเจ้าดังนี้");
+                await context.PostAsync($"1.ผม = {this.user.hair}");
+                //await context.PostAsync($"2.สีผม = {this.user.hairColor}");
+                await context.PostAsync($"2.ยิ้ม = {this.user.smile}");
+                await context.PostAsync($"3.เพศ = {this.user.gender}");
+                await context.PostAsync($"4.อายุ = {this.user.age}");
+                await context.PostAsync($"5.หนวด = {this.user.moustache}, เครา = {this.user.beard}");
+                await context.PostAsync($"6.ใส่แว่น = {this.user.glasses}");
+                await context.PostAsync($"7.แต่งตา = {this.user.eyeMakeup}, ทาปาก = {this.user.lipMakeup}");
+                await context.PostAsync($"8.อารมณ์ = {this.user.emotion}");
+                await context.PostAsync($"หาก{this.user.genderThai}สนใจบริการ Commercial Chat Bot ของ MSC กรุณาติดต่อได้ที่ Meelarp Sokuma meelasok@metrosystems.co.th Mobile:(+668) 19095487");
                 context.Done(this.user);
             }
             else
@@ -327,13 +367,12 @@ namespace SimpleEchoBot.Dialogs
                 --mobileAttempts;
                 if (mobileAttempts > 0)
                 {
-                    await context.PostAsync($"ข้าไม่เข้าใจ เบอร์โทรของ{this.user.genderThai} เบอร์อะไรเจ้าคะ (เช่น '0891234567')?");
-
-                    context.Wait(this.MobileReceivedAsync);
+                    await context.PostAsync($"ข้าไม่เข้าใจ {this.user.genderThai}ชื่ออะไรนะเจ้าคะ");
+                    context.Wait(this.NameReceivedAsync);
                 }
                 else
                 {
-                    context.Fail(new TooManyAttemptsException("ข้อความที่ออเจ้าส่งมาไม่ใช่เบอร์โทรที่ถูกต้องนะเจ้าคะ"));
+                    context.Fail(new TooManyAttemptsException("ข้อความที่ออเจ้าส่งมาไม่ใช่ชื่อที่ถูกต้องนะเจ้าคะ"));
                 }
             }
         }
