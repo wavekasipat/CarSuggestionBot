@@ -12,6 +12,12 @@ namespace SimpleEchoBot.Models
         public Boolean married { get; set; }
         public Boolean kids { get; set; }
         public string mobile { get; set; }
+        public decimal smile { get; set; }
+        public decimal anger { get; set; }
+        public decimal happiness { get; set; }
+        public Boolean eyeMakeup { get; set; }
+        public Boolean lipMakeup { get; set; }
+
 
         public string BudgetOption1 { get; set; }
         public string BudgetOption2 { get; set; }
