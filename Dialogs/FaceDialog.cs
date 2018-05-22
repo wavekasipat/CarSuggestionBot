@@ -47,6 +47,12 @@ namespace SimpleEchoBot.Dialogs
                         this.user.gender = face["faceAttributes"]["gender"].ToString();
                         this.user.age = decimal.Parse(face["faceAttributes"]["age"].ToString());
 
+                        this.user.smile = double.Parse(face["faceAttributes"]["smile"].ToString());
+                        this.user.glasses = face["faceAttributes"]["gender"].ToString();
+                        this.user.anger = double.Parse(face["faceAttributes"]["emotion"]["anger"].ToString());
+                        this.user.eyeMakeup = Convert.ToBoolean(face["faceAttributes"]["makeup"]["eyeMakeup"].ToString());
+                        this.user.lipMakeup = Convert.ToBoolean(face["faceAttributes"]["makeup"]["lipMakeup"].ToString());
+
                         if (this.user.gender == "male")
                         {
                             this.user.genderThai = "ท่านหมื่น";
@@ -54,6 +60,16 @@ namespace SimpleEchoBot.Dialogs
                         else
                         {
                             this.user.genderThai = "แม่หญิง";
+                        }
+
+                        if(this.user.eyeMakeup || this.user.lipMakeup)
+                        {
+                            string makeup = "ชอบการแต่งตัว";
+                        }
+
+                        if (this.user.anger > 0.8)
+                        {
+                            string anger = "ชอบความปราดเปรียว";
                         }
 
                         List<string> options = new List<string>() { "ใช่", "ไม่" };
