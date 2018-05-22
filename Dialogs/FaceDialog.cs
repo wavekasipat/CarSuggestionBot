@@ -119,7 +119,7 @@ namespace SimpleEchoBot.Dialogs
                     this.user.BudgetOption4,
                     this.user.BudgetOption5,
                 };
-                var quiz = this.user.gender + $"ได้โปรดระบุงบที่ต้องการซื้อรถด้วยนะเจ้าคะ";
+                var quiz = $"{this.user.genderThai}ได้โปรดระบุงบที่ต้องการซื้อรถด้วยนะเจ้าคะ";
                 PromptDialog.Choice(context, this.OnBudgetSelected, options, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
             }
             catch (TooManyAttemptsException ex)
@@ -135,7 +135,7 @@ namespace SimpleEchoBot.Dialogs
                 this.user.budget = await result;
 
                 List<string> options = new List<string>() { "ใช่", "ไม่" };
-                var quiz = this.user.gender + $"ออเจ้าแต่งงานแล้วใช่หรือไม่เจ้าคะ";
+                var quiz = $"{this.user.genderThai}แต่งงานแล้วใช่หรือไม่เจ้าคะ";
                 PromptDialog.Choice(context, this.OnMarriedSelected, options, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
             }
             catch (TooManyAttemptsException ex)
@@ -151,15 +151,15 @@ namespace SimpleEchoBot.Dialogs
                 string optionSelected = await result;
                 switch (optionSelected)
                 {
-                    case "Yes":
+                    case "ใช่":
                         this.user.married = true;
 
                         List<string> options = new List<string>() { "ใช่", "ไม่" };
-                        var quiz = this.user.gender + $"ออเจ้ามีลูกหรือไม่เจ้าคะ";
+                        var quiz = $"{this.user.genderThai}ออเจ้ามีลูกหรือไม่เจ้าคะ";
                         PromptDialog.Choice(context, this.OnKidsSelected, options, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
                         break;
 
-                    case "No":
+                    case "ไม่":
                         this.user.married = false;
                         context.Done(this.user);
                         break;
@@ -178,11 +178,11 @@ namespace SimpleEchoBot.Dialogs
                 string optionSelected = await result;
                 switch (optionSelected)
                 {
-                    case "Yes":
+                    case "ใช่":
                         this.user.kids = true;
                         break;
 
-                    case "No":
+                    case "ไม่":
                         this.user.kids = false;
                         break;
                 }

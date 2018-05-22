@@ -38,11 +38,11 @@ namespace SimpleEchoBot.Models
 
         public User()
         {
-            this.BudgetOption1 = "500k - 600k";
-            this.BudgetOption2 = "600k - 800k";
-            this.BudgetOption3 = "800k - 1.2m";
-            this.BudgetOption4 = "1.2m - 1.5m";
-            this.BudgetOption5 = "More than 1.5m";
+            this.BudgetOption1 = "5แสน ถึง 6แสน";
+            this.BudgetOption2 = "6แสน ถึง 8แสน";
+            this.BudgetOption3 = "8แสน ถึง 1.2ล้าน";
+            this.BudgetOption4 = "1.2ล้าน ถึง 1.5ล้าน";
+            this.BudgetOption5 = "มากกว่า 1.5ล้าน";
         }
     }
 }
