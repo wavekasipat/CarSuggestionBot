@@ -64,12 +64,17 @@ namespace SimpleEchoBot.Dialogs
 
                         if(this.user.eyeMakeup || this.user.lipMakeup)
                         {
-                            string makeup = "ชอบการแต่งตัว";
+                            string makeupString = "ชอบการแต่งตัว";
                         }
 
                         if (this.user.anger > 0.8)
                         {
                             string anger = "ชอบความปราดเปรียว";
+                        }
+
+                        if (this.user.smile > 0.0)
+                        {
+                            string smile = "รักความสนุกสนาน";
                         }
 
                         List<string> options = new List<string>() { "ใช่", "ไม่" };

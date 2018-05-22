@@ -72,7 +72,7 @@ namespace SimpleEchoBot.Dialogs
                             {
                                 new HeroCard
                                 {
-                                    Title = this.user.suggestCar,
+                                    Title = this.user.suggestCar2,
                                     Text = $"คันนี้ล่ะเจ้าคะ",
                                     Images = new List<CardImage> { new CardImage(this.user.suggestImage2) },
                                     Buttons = new List<CardAction> { new CardAction(ActionTypes.OpenUrl, "ข้อมูล", value: this.user.suggestUrl2) }
