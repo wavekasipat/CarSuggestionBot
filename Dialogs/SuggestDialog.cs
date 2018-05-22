@@ -35,7 +35,7 @@ namespace SimpleEchoBot.Dialogs
                 {
                     Title = this.user.suggestCar,
                     //Text = $"I suggest a {this.user.suggestCar} for you.",
-                    Text = $"จากข้อมูลของ{this.user.genderThai} และรูปถ่ายที่ได้ ออเจ้าเป็น {this.user.genderThai} อายุ {this.user.age} ปี ชอบการแต่งตัว รักความสนุกสนาน รถยนต์ที่เหมาะกับออเจ้าที่สุดคือ {this.user.suggestCar}",
+                    Text = $"จากข้อมูลของ{this.user.genderThai} และรูปถ่ายที่ได้ ออเจ้าเป็น {this.user.genderThai} อายุ {this.user.age} ปี {this.user.makeupStr} {this.user.smileStr} {this.user.angerStr} รถยนต์ที่เหมาะกับออเจ้าที่สุดคือ {this.user.suggestCar}",
                     Images = new List<CardImage> { new CardImage(this.user.suggestImage) },
                     Buttons = new List<CardAction> { new CardAction(ActionTypes.OpenUrl, "ข้อมูล", value: this.user.suggestUrl) }
                 }.ToAttachment()
@@ -387,7 +387,7 @@ namespace SimpleEchoBot.Dialogs
                                 {
                                     new HeroCard
                                     {
-                                        Title = this.user.suggestCar,
+                                        Title = this.user.suggestCar3,
                                         Text = $"จากรูปรถของ{this.user.genderThai} รถยนต์ที่เหมาะสมและใกล้เคียงกับความต้องการของ{this.user.genderThai} คือ {this.user.suggestCar3}",
                                         Images = new List<CardImage> { new CardImage(this.user.suggestImage3) },
                                         Buttons = new List<CardAction> { new CardAction(ActionTypes.OpenUrl, "ข้อมูล", value: this.user.suggestUrl3) }
