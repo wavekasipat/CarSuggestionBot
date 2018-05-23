@@ -54,6 +54,7 @@ namespace SimpleEchoBot.Models
         public int sellInYear { get; set; }
 
         public string likedCar { get; set; }
+        public string name { get; set; }
 
         public User()
         {

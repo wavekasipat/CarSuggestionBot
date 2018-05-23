@@ -343,6 +343,7 @@ namespace SimpleEchoBot.Dialogs
 
             if (message.Text != null)
             {
+                this.user.name = message.Text.Trim();
                 await context.PostAsync($"ขอบน้ำใจ{this.user.genderThai} ที่สละเวลาให้กับข้า {this.user.genderThai}สามารถติดต่อข้าได้ทุกเวลาหนา");
 
                 var str = "เฉลยนะออเจ้า จากรูปถ่ายใบหน้าของออเจ้า ข้าสามารถรู้ข้อมูลออเจ้าดังนี้";
