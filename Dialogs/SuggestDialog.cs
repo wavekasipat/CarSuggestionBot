@@ -14,10 +14,13 @@ namespace SimpleEchoBot.Dialogs
     public class SuggestDialog : IDialog<User>
     {
         private User user = new User();
+        private int likeAttemps = 2;
         private int modelAttempts = 3;
         private int yearAttempts = 3;
         private int mobileAttempts = 3;
-        private int likeAttemps = 2;
+        private int nameAttempts = 3;
+
+        List<string> yesNoOptions = new List<string>() { "ใช่", "ไม่" };
 
         public SuggestDialog(User user)
         {
@@ -41,18 +44,16 @@ namespace SimpleEchoBot.Dialogs
                 }.ToAttachment()
             };
             await context.PostAsync(message);
-
-            List<string> options = new List<string>() { "ใช่", "ไม่" };
+            
             //var quiz = $"Do you like this car?";
             var quiz = $"{this.user.genderThai} ชอบรถคันนี้หรือไม่เจ้าคะ (หากไม่ ข้าจักแนะนำรถที่ใกล้เคียงแก่{this.user.genderThai}หนา)";
-            PromptDialog.Choice(context, this.OnLikeSelected, options, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
+            PromptDialog.Choice(context, this.OnLikeSelected, yesNoOptions, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
         }
 
         private async Task OnLikeSelected(IDialogContext context, IAwaitable<string> result)
         {
             try
             {
-                List<string> options = new List<string>() { "ใช่", "ไม่" };
                 var quiz = "";
                 string optionSelected = await result;
                 switch (optionSelected)
@@ -60,7 +61,7 @@ namespace SimpleEchoBot.Dialogs
                     case "ใช่":
                         //quiz = $"Glad to hear That, we offer an attractive discounts on exchange or Sell-in of Used Cars. Do you want to available the service?";
                         quiz = $"ข้ายินดียิ่งนักที่{this.user.genderThai}สนใจรถของข้า ข้ามีโปรโมชั่นพิเศษ รถเก่าแลกรถใหม่ {this.user.genderThai}สนใจข้อเสนอพิเศษนี้หรือไม่";
-                        PromptDialog.Choice(context, this.OnSellInSelected, options, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
+                        PromptDialog.Choice(context, this.OnSellInSelected, yesNoOptions, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
                         break;
 
                     case "ไม่":
@@ -81,7 +82,7 @@ namespace SimpleEchoBot.Dialogs
                             await context.PostAsync(message);
 
                             quiz = $"{this.user.genderThai}ชอบรถคันนี้หรือไม่เจ้าคะ";
-                            PromptDialog.Choice(context, this.OnLikeSelected, options, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
+                            PromptDialog.Choice(context, this.OnLikeSelected, yesNoOptions, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
                         }
                         else
                         {
@@ -101,8 +102,6 @@ namespace SimpleEchoBot.Dialogs
         {
             try
             {
-                List<string> options = new List<string>() { "ใช่", "ไม่" };
-                var quiz = "";
                 string optionSelected = await result;
                 switch (optionSelected)
                 {
@@ -112,8 +111,6 @@ namespace SimpleEchoBot.Dialogs
                         break;
 
                     case "ไม่":
-                        //quiz = $"ข้าขอเบอร์โทรติดต่อของ{this.user.genderThai}ได้หรือไม่ ข้าจักให้คนของข้าติดต่อกลับไป พร้อมกับข้อเสนอที่น่าสนใจโดยเร็ว";
-                        //PromptDialog.Choice(context, this.OnMobileSelected, options, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
                         await context.PostAsync($"ข้าขอเบอร์โทรติดต่อของ{this.user.genderThai}ด้วยนะเจ้าคะ ข้าจักให้คนของข้าติดต่อกลับไป พร้อมกับข้อเสนอที่น่าสนใจโดยเร็ว (เช่น ‘0891234567’)");
                         context.Wait(this.MobileReceivedAsync);
                         break;
@@ -219,7 +216,6 @@ namespace SimpleEchoBot.Dialogs
                 if (modelAttempts > 0)
                 {
                     await context.PostAsync($"ข้าไม่เข้าใจ โปรดระบุรุ่นรถของ{this.user.genderThai}ด้วยเถิดหนา (เช่น 'Honda Jazz' เฉพาะรถของ Honda)");
-
                     context.Wait(this.ModelReceivedAsync);
                 }
                 else
@@ -244,10 +240,9 @@ namespace SimpleEchoBot.Dialogs
                 this.user.sellInPrice = originPrice * (1 - ((27 + 4 * usedYears) / (decimal)100));
 
                 var sellInPriceStr = this.user.sellInPrice.ToString("#,##0.00");
-
-                List<string> options = new List<string>() { "ใช่", "ไม่" };
+                
                 var quiz = $"ราคาที่เหมาะสมกับรถของ{this.user.genderThai} คือ {sellInPriceStr} บาท ราคานี้สามารถเพิ่มหรือลดลงตามข้อมูลที่ได้จาก{this.user.genderThai}เพิ่มเติม ออเจ้าสนใจข้อเสนอนี้หรือไม่ ";
-                PromptDialog.Choice(context, this.OnSellInConfirmSelected, options, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
+                PromptDialog.Choice(context, this.OnSellInConfirmSelected, yesNoOptions, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
             }
             else
             {
@@ -269,8 +264,6 @@ namespace SimpleEchoBot.Dialogs
         {
             try
             {
-                List<string> options = new List<string>() { "ใช่", "ไม่" };
-                var quiz = "";
                 string optionSelected = await result;
                 //switch (optionSelected)
                 //{
@@ -281,7 +274,7 @@ namespace SimpleEchoBot.Dialogs
 
                 //    case "ไม่":
                 //        quiz = $"ข้าขอเบอร์โทรติดต่อของ{this.user.genderThai}ได้หรือไม่ ข้าจักให้คนของข้าติดต่อกลับไป พร้อมกับข้อเสนอที่น่าสนใจโดยเร็ว";
-                //        PromptDialog.Choice(context, this.OnMobileSelected, options, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
+                //        PromptDialog.Choice(context, this.OnMobileSelected, yesNoOptions, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
                 //        break;
                 //}
 
@@ -359,24 +352,15 @@ namespace SimpleEchoBot.Dialogs
                 str += $"\n6.ใส่แว่น : {this.user.glasses}";
                 str += $"\n7.แต่งตา : {this.user.eyeMakeup}, ทาปาก : {this.user.lipMakeup}";
                 str += $"\n8.อารมณ์ : {this.user.emotion}";
-
                 await context.PostAsync(str);
-                //await context.PostAsync($"1.ผม = {this.user.hair}");
-                ////await context.PostAsync($"2.สีผม = {this.user.hairColor}");
-                //await context.PostAsync($"2.ยิ้ม = {this.user.smile}");
-                //await context.PostAsync($"3.เพศ = {this.user.gender}");
-                //await context.PostAsync($"4.อายุ = {this.user.age}");
-                //await context.PostAsync($"5.หนวด = {this.user.moustache}, เครา = {this.user.beard}");
-                //await context.PostAsync($"6.ใส่แว่น = {this.user.glasses}");
-                //await context.PostAsync($"7.แต่งตา = {this.user.eyeMakeup}, ทาปาก = {this.user.lipMakeup}");
-                //await context.PostAsync($"8.อารมณ์ = {this.user.emotion}");
+
                 await context.PostAsync($"หาก{this.user.genderThai}สนใจบริการ Commercial Chat Bot ของ MSC กรุณาติดต่อได้ที่ มีลาภ โสขุมา meelasok@metrosystems.co.th Mobile:(+668) 19095487");
                 context.Done(this.user);
             }
             else
             {
-                --mobileAttempts;
-                if (mobileAttempts > 0)
+                --nameAttempts;
+                if (nameAttempts > 0)
                 {
                     await context.PostAsync($"ข้าไม่เข้าใจ {this.user.genderThai}ชื่ออะไรนะเจ้าคะ");
                     context.Wait(this.NameReceivedAsync);
@@ -444,10 +428,9 @@ namespace SimpleEchoBot.Dialogs
                                     }.ToAttachment()
                                 };
                                 await context.PostAsync(outMessage);
-
-                                List<string> options = new List<string>() { "ใช่", "ไม่" };
+                                
                                 var quiz = $"ข้ามีโปรโมชั่นพิเศษ รถเก่าแลกรถใหม่ {this.user.genderThai}สนใจข้อเสนอพิเศษนี้หรือไม่";
-                                PromptDialog.Choice(context, this.OnSellInSelected, options, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
+                                PromptDialog.Choice(context, this.OnSellInSelected, yesNoOptions, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
 
                                 break;
                             }

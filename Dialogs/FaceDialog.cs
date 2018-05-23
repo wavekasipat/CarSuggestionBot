@@ -16,6 +16,8 @@ namespace SimpleEchoBot.Dialogs
         private User user = new User();
         private int attempts = 3;
 
+        List<string> yesNoOptions = new List<string>() { "ใช่", "ไม่" };
+
         public FaceDialog(User user)
         {
             this.user = user;
@@ -102,10 +104,9 @@ namespace SimpleEchoBot.Dialogs
                         {
                             this.user.angerStr = "ชอบความปราดเปรียว";
                         }
-
-                        List<string> options = new List<string>() { "ใช่", "ไม่" };
+                        
                         var quiz = $"ข้าเห็นหน้าออเจ้าแล้ว ออเจ้าเป็น{this.user.genderThai} ใช่หรือไม่";
-                        PromptDialog.Choice(context, this.OnGenderSelected, options, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
+                        PromptDialog.Choice(context, this.OnGenderSelected, yesNoOptions, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
                     }
                     else
                     {
@@ -180,10 +181,9 @@ namespace SimpleEchoBot.Dialogs
             try
             {
                 this.user.budget = await result;
-
-                List<string> options = new List<string>() { "ใช่", "ไม่" };
+                
                 var quiz = $"{this.user.genderThai}แต่งงานแล้วใช่หรือไม่เจ้าคะ";
-                PromptDialog.Choice(context, this.OnMarriedSelected, options, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
+                PromptDialog.Choice(context, this.OnMarriedSelected, yesNoOptions, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
             }
             catch (TooManyAttemptsException ex)
             {
@@ -200,10 +200,9 @@ namespace SimpleEchoBot.Dialogs
                 {
                     case "ใช่":
                         this.user.married = true;
-
-                        List<string> options = new List<string>() { "ใช่", "ไม่" };
+                        
                         var quiz = $"{this.user.genderThai}มีลูกหรือไม่เจ้าคะ";
-                        PromptDialog.Choice(context, this.OnKidsSelected, options, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
+                        PromptDialog.Choice(context, this.OnKidsSelected, yesNoOptions, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
                         break;
 
                     case "ไม่":
