@@ -49,14 +49,14 @@ namespace SimpleEchoBot.Dialogs
                         this.user.gender = face["gender"].ToString();
                         this.user.age = decimal.Parse(face["age"].ToString());
 
-                        this.user.smile = double.Parse(face["smile"].ToString());
+                        this.user.smile = decimal.Parse(face["smile"].ToString());
                         this.user.glasses = face["glasses"].ToString();
-                        this.user.anger = double.Parse(face["emotion"]["anger"].ToString());
+                        this.user.anger = decimal.Parse(face["emotion"]["anger"].ToString());
                         this.user.eyeMakeup = Convert.ToBoolean(face["makeup"]["eyeMakeup"].ToString());
                         this.user.lipMakeup = Convert.ToBoolean(face["makeup"]["lipMakeup"].ToString());
 
                         this.user.hair = face["hair"].ToString();
-                        this.user.bald = double.Parse(face["smile"].ToString());
+                        this.user.bald = decimal.Parse(face["smile"].ToString());
                         var hairColor = face["hair"]["hairColor"];
                         if (hairColor.Count > 0)
                         {
@@ -66,8 +66,8 @@ namespace SimpleEchoBot.Dialogs
                         {
                             this.user.hairColor = "";
                         }
-                        this.user.moustache = double.Parse(face["facialHair"]["moustache"].ToString());
-                        this.user.beard = double.Parse(face["facialHair"]["beard"].ToString());
+                        this.user.moustache = decimal.Parse(face["facialHair"]["moustache"].ToString());
+                        this.user.beard = decimal.Parse(face["facialHair"]["beard"].ToString());
                         this.user.emotion = face["emotion"].ToString();
 
                         if (this.user.gender == "male")
@@ -88,7 +88,7 @@ namespace SimpleEchoBot.Dialogs
                             this.user.makeupStr = "เป็นคนง่ายๆ สบายๆ";
                         }
 
-                        if (this.user.smile > 0.0)
+                        if (this.user.smile > 0.0M)
                         {
                             this.user.smileStr = "รักความสนุกสนาน";
                         }
@@ -104,7 +104,7 @@ namespace SimpleEchoBot.Dialogs
                             }
                         }
 
-                        if (this.user.anger > 0.8)
+                        if (this.user.anger > 0.7M)
                         {
                             this.user.angerStr = "ชอบความปราดเปรียว";
                         }

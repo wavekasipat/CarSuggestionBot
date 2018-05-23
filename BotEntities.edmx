@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CarSuggestionBotSQLModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="1000" />
+          <Property Name="gender" Type="nvarchar" MaxLength="1000" />
+          <Property Name="age" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="budget" Type="nvarchar" MaxLength="1000" />
+          <Property Name="married" Type="bit" />
+          <Property Name="kids" Type="bit" />
+          <Property Name="mobile" Type="nvarchar" MaxLength="1000" />
+          <Property Name="smile" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="anger" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="happiness" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="eyeMakeup" Type="bit" />
+          <Property Name="lipMakeup" Type="bit" />
+          <Property Name="glasses" Type="nvarchar" MaxLength="1000" />
+          <Property Name="hair" Type="nvarchar" MaxLength="1000" />
+          <Property Name="bald" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="hairColor" Type="nvarchar" MaxLength="1000" />
+          <Property Name="moustache" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="beard" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="emotion" Type="nvarchar" MaxLength="1000" />
+          <Property Name="makeupStr" Type="nvarchar" MaxLength="1000" />
+          <Property Name="smileStr" Type="nvarchar" MaxLength="1000" />
+          <Property Name="angerStr" Type="nvarchar" MaxLength="1000" />
+          <Property Name="sellInCar" Type="nvarchar" MaxLength="1000" />
+          <Property Name="sellInOriginPrice" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="sellInPrice" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="sellInYear" Type="int" />
+          <Property Name="likedCar" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityContainer Name="CarSuggestionBotSQLModelStoreContainer">
+          <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CarSuggestionBotSQLModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CarSuggestionBotSQLEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="users" EntityType="CarSuggestionBotSQLModel.user" />
+        </EntityContainer>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="gender" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="age" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="budget" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="married" Type="Boolean" />
+          <Property Name="kids" Type="Boolean" />
+          <Property Name="mobile" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="smile" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="anger" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="happiness" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="eyeMakeup" Type="Boolean" />
+          <Property Name="lipMakeup" Type="Boolean" />
+          <Property Name="glasses" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="hair" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="bald" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="hairColor" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="moustache" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="beard" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="emotion" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="makeupStr" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="smileStr" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="angerStr" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="sellInCar" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="sellInOriginPrice" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="sellInPrice" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="sellInYear" Type="Int32" />
+          <Property Name="likedCar" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CarSuggestionBotSQLModelStoreContainer" CdmEntityContainer="CarSuggestionBotSQLEntities">
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="CarSuggestionBotSQLModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="likedCar" ColumnName="likedCar" />
+                <ScalarProperty Name="sellInYear" ColumnName="sellInYear" />
+                <ScalarProperty Name="sellInPrice" ColumnName="sellInPrice" />
+                <ScalarProperty Name="sellInOriginPrice" ColumnName="sellInOriginPrice" />
+                <ScalarProperty Name="sellInCar" ColumnName="sellInCar" />
+                <ScalarProperty Name="angerStr" ColumnName="angerStr" />
+                <ScalarProperty Name="smileStr" ColumnName="smileStr" />
+                <ScalarProperty Name="makeupStr" ColumnName="makeupStr" />
+                <ScalarProperty Name="emotion" ColumnName="emotion" />
+                <ScalarProperty Name="beard" ColumnName="beard" />
+                <ScalarProperty Name="moustache" ColumnName="moustache" />
+                <ScalarProperty Name="hairColor" ColumnName="hairColor" />
+                <ScalarProperty Name="bald" ColumnName="bald" />
+                <ScalarProperty Name="hair" ColumnName="hair" />
+                <ScalarProperty Name="glasses" ColumnName="glasses" />
+                <ScalarProperty Name="lipMakeup" ColumnName="lipMakeup" />
+                <ScalarProperty Name="eyeMakeup" ColumnName="eyeMakeup" />
+                <ScalarProperty Name="happiness" ColumnName="happiness" />
+                <ScalarProperty Name="anger" ColumnName="anger" />
+                <ScalarProperty Name="smile" ColumnName="smile" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="kids" ColumnName="kids" />
+                <ScalarProperty Name="married" ColumnName="married" />
+                <ScalarProperty Name="budget" ColumnName="budget" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

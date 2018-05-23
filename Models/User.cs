@@ -12,18 +12,18 @@ namespace SimpleEchoBot.Models
         public Boolean married { get; set; }
         public Boolean kids { get; set; }
         public string mobile { get; set; }
-        public double smile { get; set; }
-        public double anger { get; set; }
-        public double happiness { get; set; }
+        public decimal smile { get; set; }
+        public decimal anger { get; set; }
+        public decimal happiness { get; set; }
         public Boolean eyeMakeup { get; set; }
         public Boolean lipMakeup { get; set; }
         public string glasses { get; set; }
 
         public string hair { get; set; }
-        public double bald { get; set; }
+        public decimal bald { get; set; }
         public string hairColor { get; set; }
-        public double moustache { get; set; }
-        public double beard { get; set; }
+        public decimal moustache { get; set; }
+        public decimal beard { get; set; }
         public string emotion { get; set; }
 
         public string makeupStr { get; set; }
@@ -52,6 +52,8 @@ namespace SimpleEchoBot.Models
         public decimal sellInOriginPrice { get; set; }
         public decimal sellInPrice { get; set; }
         public int sellInYear { get; set; }
+
+        public string likedCar { get; set; }
 
         public User()
         {

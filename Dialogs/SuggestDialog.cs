@@ -31,6 +31,7 @@ namespace SimpleEchoBot.Dialogs
         {
             SuggestCarCondition();
 
+            this.user.likedCar = this.user.suggestCar;
             var message = context.MakeMessage();
             message.Attachments = new List<Attachment>()
             {
@@ -68,6 +69,7 @@ namespace SimpleEchoBot.Dialogs
                         --likeAttemps;
                         if (likeAttemps > 0)
                         {
+                            this.user.likedCar = this.user.suggestCar2;
                             var message = context.MakeMessage();
                             message.Attachments = new List<Attachment>()
                             {
@@ -416,6 +418,8 @@ namespace SimpleEchoBot.Dialogs
                             else
                             {
                                 SuggestCarConditionFromModel(tag);
+
+                                this.user.likedCar = this.user.suggestCar3;
                                 var outMessage = context.MakeMessage();
                                 outMessage.Attachments = new List<Attachment>()
                                 {

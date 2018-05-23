@@ -2,6 +2,7 @@
 using Microsoft.Bot.Connector;
 using SimpleEchoBot.Dialogs;
 using SimpleEchoBot.Models;
+using SimpleEchoBot.Utils;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -81,6 +82,7 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
             try
             {
                 this.user = await result;
+                DBUser.addUser(this.user);
                 context.Wait(this.MessageReceivedAsync);
             }
             catch (TooManyAttemptsException)
