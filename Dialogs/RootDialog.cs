@@ -27,6 +27,7 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
 
         private async Task SendWelcomeMessageAsync(IDialogContext context)
         {
+            user = new User();
             //PromptDialog.Choice(context, this.OnOptionSelected, new List<string>() { "Yes", "No" }, "Hi, Do you want to know which car model will suit your life style? ", "Not a valid option", 3);
             PromptDialog.Choice(context, this.OnOptionSelected, new List<string>() { "ใช่", "ไม่" }, "สวัสดีออเจ้า ออเจ้าอยากให้ข้าแนะนำรุ่นรถยนต์ที่เหมาะกับออเจ้าหรือไม่?", "ออเจ้าเลือกไม่ถูกต้อง", 3);
         }

@@ -62,6 +62,10 @@ namespace SimpleEchoBot.Dialogs
                         {
                             this.user.hairColor = hairColor[0]["color"].ToString();
                         }
+                        else
+                        {
+                            this.user.hairColor = "";
+                        }
                         this.user.moustache = double.Parse(face["facialHair"]["moustache"].ToString());
                         this.user.beard = double.Parse(face["facialHair"]["beard"].ToString());
                         this.user.emotion = face["emotion"].ToString();
@@ -103,6 +107,10 @@ namespace SimpleEchoBot.Dialogs
                         if (this.user.anger > 0.8)
                         {
                             this.user.angerStr = "ชอบความปราดเปรียว";
+                        }
+                        else
+                        {
+                            this.user.angerStr = "";
                         }
                         
                         var quiz = $"ข้าเห็นหน้าออเจ้าแล้ว ออเจ้าเป็น{this.user.genderThai} ใช่หรือไม่";

@@ -429,8 +429,8 @@ namespace SimpleEchoBot.Dialogs
                                 };
                                 await context.PostAsync(outMessage);
                                 
-                                var quiz = $"ข้ามีโปรโมชั่นพิเศษ รถเก่าแลกรถใหม่ {this.user.genderThai}สนใจข้อเสนอพิเศษนี้หรือไม่";
-                                PromptDialog.Choice(context, this.OnSellInSelected, yesNoOptions, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
+                                var quiz = $"{this.user.genderThai}ชอบรถยนต์คันนี้หรือไม่";
+                                PromptDialog.Choice(context, this.OnLikeVisionCarSelected, yesNoOptions, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
 
                                 break;
                             }
@@ -452,6 +452,31 @@ namespace SimpleEchoBot.Dialogs
             {
                 await context.PostAsync($"ข้าไม่เห็นรูปอะไรเลยเจ้าค่ะ");
                 context.Wait(CarPhotoReceivedAsync);
+            }
+        }
+
+        private async Task OnLikeVisionCarSelected(IDialogContext context, IAwaitable<string> result)
+        {
+            try
+            {
+                var quiz = "";
+                string optionSelected = await result;
+                switch (optionSelected)
+                {
+                    case "ใช่":
+                        quiz = $"ข้ายินดียิ่งนักที่{this.user.genderThai}สนใจรถของข้า ข้ามีโปรโมชั่นพิเศษ รถเก่าแลกรถใหม่ {this.user.genderThai}สนใจข้อเสนอพิเศษนี้หรือไม่";
+                        PromptDialog.Choice(context, this.OnSellInSelected, yesNoOptions, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
+                        break;
+
+                    case "ไม่":
+                        await context.PostAsync($"หาก{this.user.genderThai}มีรถคันโปรดอีก ได้โปรดนำรูปรถส่งมาให้ข้าเถิดเจ้าค่ะ");
+                        context.Wait(CarPhotoReceivedAsync);
+                        break;
+                }
+            }
+            catch (TooManyAttemptsException ex)
+            {
+                context.Fail(new TooManyAttemptsException("ข้าเสียใจยิ่ง ระบบขัดข้อง ลองเริ่มกันใหม่นะเจ้าคะ"));
             }
         }
 
