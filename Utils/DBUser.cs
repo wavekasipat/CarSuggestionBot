@@ -40,6 +40,7 @@ namespace SimpleEchoBot.Utils
             newUser.sellInPrice = user.sellInPrice;
             newUser.sellInYear = user.sellInYear;
             newUser.likedCar = user.likedCar;
+            newUser.photoUrl = user.photoUrl;
 
             db.users.Add(newUser);
 

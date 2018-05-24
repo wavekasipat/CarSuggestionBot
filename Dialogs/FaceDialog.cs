@@ -39,9 +39,8 @@ namespace SimpleEchoBot.Dialogs
 
                 if (attachment.ContentType == "image/png" || attachment.ContentType == "image/jpeg")
                 {
-                    var contentStream = await ImageStream.GetImageStream(attachment.ContentUrl);
-
-                    dynamic json = await FaceAPI.GetFaceAPIJson(contentStream);
+                    dynamic json = await FaceAPI.GetFaceAPIJson(attachment.ContentUrl);
+                    this.user.photoUrl = await AzureBlob.UploadPhoto(attachment.ContentUrl, attachment.ContentType);
 
                     if (json.Count > 0)
                     {

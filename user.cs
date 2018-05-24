@@ -42,5 +42,6 @@ namespace SimpleEchoBot
         public Nullable<decimal> sellInPrice { get; set; }
         public Nullable<int> sellInYear { get; set; }
         public string likedCar { get; set; }
+        public string photoUrl { get; set; }
     }
 }

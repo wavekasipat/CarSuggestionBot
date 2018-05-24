@@ -8,8 +8,10 @@ namespace SimpleEchoBot.Utils
 {
     public class FaceAPI
     {
-        public static async Task<JArray> GetFaceAPIJson(Stream contentStream)
+        public static async Task<JArray> GetFaceAPIJson(string contentUrl)
         {
+            var contentStream = await ImageStream.GetImageStream(contentUrl);
+
             var faceUrl = "https://southeastasia.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceAttributes=age,gender,smile,glasses,emotion,hair,makeup,facialHair";
 
             var req = new HttpRequestMessage(HttpMethod.Post, faceUrl);

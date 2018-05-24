@@ -216,6 +216,7 @@
     <Compile Include="user.cs">
       <DependentUpon>BotEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Utils\AzureBlob.cs" />
     <Compile Include="Utils\CustomVision.cs" />
     <Compile Include="Utils\DBUser.cs" />
     <Compile Include="Utils\FaceAPI.cs" />

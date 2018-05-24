@@ -56,6 +56,8 @@ namespace SimpleEchoBot.Models
         public string likedCar { get; set; }
         public string name { get; set; }
 
+        public string photoUrl { get; set; }
+
         public User()
         {
             this.BudgetOption1 = "5แสน ถึง 6แสน";
