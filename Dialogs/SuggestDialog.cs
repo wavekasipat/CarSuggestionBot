@@ -348,14 +348,14 @@ namespace SimpleEchoBot.Dialogs
                 await context.PostAsync($"ขอบน้ำใจ{this.user.genderThai} ที่สละเวลาให้กับข้า {this.user.genderThai}สามารถติดต่อข้าได้ทุกเวลาหนา");
 
                 var str = "เฉลยนะออเจ้า จากรูปถ่ายใบหน้าของออเจ้า ข้าสามารถรู้ข้อมูลออเจ้าดังนี้";
-                str += $"<br>1.สีผม : {this.user.hairColor}";
-                str += $"<br>2.ยิ้ม : {this.user.smile}";
-                str += $"<br>3.เพศ : {this.user.gender}";
-                str += $"<br>4.อายุ : {this.user.age}";
-                str += $"<br>5.หนวด : {this.user.moustache}, เครา : {this.user.beard}";
-                str += $"<br>6.ใส่แว่น : {this.user.glasses}";
-                str += $"<br>7.แต่งตา : {this.user.eyeMakeup}, ทาปาก : {this.user.lipMakeup}";
-                str += $"<br>8.อารมณ์ : {this.user.emotion.Replace("\"", "")}";
+                str += $"\r\n1.สีผม : {this.user.hairColor}";
+                str += $"\r\n2.ยิ้ม : {this.user.smile}";
+                str += $"\r\n3.เพศ : {this.user.gender}";
+                str += $"\r\n4.อายุ : {this.user.age}";
+                str += $"\r\n5.หนวด : {this.user.moustache}, เครา : {this.user.beard}";
+                str += $"\r\n6.ใส่แว่น : {this.user.glasses}";
+                str += $"\r\n7.แต่งตา : {this.user.eyeMakeup}, ทาปาก : {this.user.lipMakeup}";
+                str += $"\r\n8.อารมณ์ : {this.user.emotion.Replace("\"", "")}";
                 await context.PostAsync(str);
 
                 await context.PostAsync($"หาก{this.user.genderThai}สนใจบริการ Commercial Chat Bot ของ MSC กรุณาติดต่อได้ที่ มีลาภ โสขุมา meelasok@metrosystems.co.th Mobile:(+668) 19095487");
