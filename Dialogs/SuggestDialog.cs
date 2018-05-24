@@ -46,7 +46,7 @@ namespace SimpleEchoBot.Dialogs
             };
             await context.PostAsync(message);
 
-            await context.PostAsync($"จากข้อมูลของ{this.user.genderThai} และรูปถ่ายที่ได้ ออเจ้าเป็น {this.user.genderThai} อายุ {this.user.age} ปี {this.user.makeupStr} {this.user.smileStr} {this.user.angerStr} รถยนต์ที่เหมาะกับออเจ้าที่สุดคือ {this.user.suggestCar}");
+            await context.PostAsync($"จากข้อมูลของ{this.user.genderThai} และรูปถ่ายที่ได้ {this.user.genderThai}อายุ {this.user.age} ปี {this.user.makeupStr} {this.user.smileStr} {this.user.angerStr} รถยนต์ที่เหมาะกับออเจ้าที่สุดคือ {this.user.suggestCar}");
 
             //var quiz = $"Do you like this car?";
             var quiz = $"{this.user.genderThai} ชอบรถคันนี้หรือไม่เจ้าคะ (หากไม่ ข้าจักแนะนำรถที่ใกล้เคียงแก่{this.user.genderThai}หนา)";
