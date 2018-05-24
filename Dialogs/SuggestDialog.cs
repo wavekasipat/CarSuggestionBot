@@ -39,13 +39,15 @@ namespace SimpleEchoBot.Dialogs
                 {
                     Title = this.user.suggestCar,
                     //Text = $"I suggest a {this.user.suggestCar} for you.",
-                    Text = $"จากข้อมูลของ{this.user.genderThai} และรูปถ่ายที่ได้ ออเจ้าเป็น {this.user.genderThai} อายุ {this.user.age} ปี {this.user.makeupStr} {this.user.smileStr} {this.user.angerStr} รถยนต์ที่เหมาะกับออเจ้าที่สุดคือ {this.user.suggestCar}",
+                    //Text = $"จากข้อมูลของ{this.user.genderThai} และรูปถ่ายที่ได้ ออเจ้าเป็น {this.user.genderThai} อายุ {this.user.age} ปี {this.user.makeupStr} {this.user.smileStr} {this.user.angerStr} รถยนต์ที่เหมาะกับออเจ้าที่สุดคือ {this.user.suggestCar}",
                     Images = new List<CardImage> { new CardImage(this.user.suggestImage) },
                     Buttons = new List<CardAction> { new CardAction(ActionTypes.OpenUrl, "ข้อมูล", value: this.user.suggestUrl) }
                 }.ToAttachment()
             };
             await context.PostAsync(message);
-            
+
+            await context.PostAsync($"จากข้อมูลของ{this.user.genderThai} และรูปถ่ายที่ได้ ออเจ้าเป็น {this.user.genderThai} อายุ {this.user.age} ปี {this.user.makeupStr} {this.user.smileStr} {this.user.angerStr} รถยนต์ที่เหมาะกับออเจ้าที่สุดคือ {this.user.suggestCar}");
+
             //var quiz = $"Do you like this car?";
             var quiz = $"{this.user.genderThai} ชอบรถคันนี้หรือไม่เจ้าคะ (หากไม่ ข้าจักแนะนำรถที่ใกล้เคียงแก่{this.user.genderThai}หนา)";
             PromptDialog.Choice(context, this.OnLikeSelected, yesNoOptions, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
@@ -83,7 +85,8 @@ namespace SimpleEchoBot.Dialogs
                             };
                             await context.PostAsync(message);
 
-                            quiz = $"{this.user.genderThai}ชอบรถคันนี้หรือไม่เจ้าคะ";
+                            //quiz = $"{this.user.genderThai}ชอบรถคันนี้หรือไม่เจ้าคะ";
+                            quiz = $"คันนี้ล่ะเจ้าคะ {this.user.genderThai}ชอบหรือไม่เจ้าคะ";
                             PromptDialog.Choice(context, this.OnLikeSelected, yesNoOptions, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
                         }
                         else
@@ -428,14 +431,16 @@ namespace SimpleEchoBot.Dialogs
                                     new HeroCard
                                     {
                                         Title = this.user.suggestCar3,
-                                        Text = $"จากรูปรถของ{this.user.genderThai} รถยนต์ที่เหมาะสมและใกล้เคียงกับความต้องการของ{this.user.genderThai} คือ {this.user.suggestCar3}",
+                                        //Text = $"จากรูปรถของ{this.user.genderThai} รถยนต์ที่เหมาะสมและใกล้เคียงกับความต้องการของ{this.user.genderThai} คือ {this.user.suggestCar3}",
                                         Images = new List<CardImage> { new CardImage(this.user.suggestImage3) },
                                         Buttons = new List<CardAction> { new CardAction(ActionTypes.OpenUrl, "ข้อมูล", value: this.user.suggestUrl3) }
                                     }.ToAttachment()
                                 };
                                 await context.PostAsync(outMessage);
-                                
-                                var quiz = $"{this.user.genderThai}ชอบรถยนต์คันนี้หรือไม่";
+
+                                await context.PostAsync($"จากรูปรถของ{this.user.genderThai} รถยนต์ที่เหมาะสมและใกล้เคียงกับความต้องการของ{this.user.genderThai} คือ {this.user.suggestCar3}");
+
+                                var quiz = $"{this.user.genderThai}ชอบรถยนต์คันนี้หรือไม่เจ้าคะ";
                                 PromptDialog.Choice(context, this.OnLikeVisionCarSelected, yesNoOptions, quiz, "ออเจ้าเลือกไม่ถูกต้อง", 3);
 
                                 break;
