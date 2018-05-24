@@ -13,6 +13,7 @@ namespace SimpleEchoBot.Utils
             CarSuggestionBotSQLEntities db = new CarSuggestionBotSQLEntities();
 
             user newUser = new user();
+            newUser.name = user.name;
             newUser.gender = user.gender;
             newUser.age = user.age;
             newUser.budget = user.budget;
