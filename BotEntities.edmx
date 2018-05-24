@@ -38,6 +38,7 @@
           <Property Name="sellInYear" Type="int" />
           <Property Name="likedCar" Type="nvarchar" MaxLength="1000" />
           <Property Name="photoUrl" Type="nvarchar" MaxLength="1000" />
+          <Property Name="createdOn" Type="datetime" />
         </EntityType>
         <EntityContainer Name="CarSuggestionBotSQLModelStoreContainer">
           <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
@@ -82,6 +83,7 @@
           <Property Name="sellInYear" Type="Int32" />
           <Property Name="likedCar" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="photoUrl" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="createdOn" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -92,6 +94,7 @@
           <EntitySetMapping Name="users">
             <EntityTypeMapping TypeName="CarSuggestionBotSQLModel.user">
               <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="createdOn" ColumnName="createdOn" />
                 <ScalarProperty Name="photoUrl" ColumnName="photoUrl" />
                 <ScalarProperty Name="likedCar" ColumnName="likedCar" />
                 <ScalarProperty Name="sellInYear" ColumnName="sellInYear" />

@@ -42,6 +42,8 @@ namespace SimpleEchoBot.Utils
             newUser.likedCar = user.likedCar;
             newUser.photoUrl = user.photoUrl;
 
+            newUser.createdOn = DateTime.Now;
+
             db.users.Add(newUser);
 
             db.SaveChanges();

@@ -43,5 +43,6 @@ namespace SimpleEchoBot
         public Nullable<int> sellInYear { get; set; }
         public string likedCar { get; set; }
         public string photoUrl { get; set; }
+        public Nullable<System.DateTime> createdOn { get; set; }
     }
 }
