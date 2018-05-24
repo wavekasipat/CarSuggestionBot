@@ -16,7 +16,8 @@ namespace SimpleEchoBot.Utils
             var contentStream = await ImageStream.GetImageStream(contentUrl);
 
             // Retrieve storage account from connection string.
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse("DefaultEndpointsProtocol=https;AccountName=carsuggestionbotphoto;AccountKey=u/NEb5/lpWQ0zFfdl9+WCXWtonNLKGO3578pBOhxISCtXbu1Sq0vwMoxYG3oozmUAyxCxFHcsia83RCP6wNFPg==;EndpointSuffix=core.windows.net");
+            //CloudStorageAccount storageAccount = CloudStorageAccount.Parse("DefaultEndpointsProtocol=https;AccountName=carsuggestionbotphoto;AccountKey=u/NEb5/lpWQ0zFfdl9+WCXWtonNLKGO3578pBOhxISCtXbu1Sq0vwMoxYG3oozmUAyxCxFHcsia83RCP6wNFPg==;EndpointSuffix=core.windows.net");
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse("DefaultEndpointsProtocol=https;AccountName=chatbotmscstorage;AccountKey=mHLlFL0vUphzwAmKGRHcoxP+wb3DabCSLkPYfXAAVlr255YW2mKURYGLZ6//+LlfEmQ+efDOca6xD83y2orNug==;EndpointSuffix=core.windows.net");
 
             // Create the blob client.
             CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();

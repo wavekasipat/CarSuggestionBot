@@ -319,6 +319,7 @@ namespace SimpleEchoBot.Dialogs
 
             if (message.Text != null && Regex.IsMatch(message.Text.Trim(), @"\+?[0-9]{10}"))
             {
+                this.user.mobile = message.Text.Trim();
                 await context.PostAsync($"ข้าขอชื่อของ{this.user.genderThai}ด้วยเถิดหนา");
                 context.Wait(this.NameReceivedAsync);
             }

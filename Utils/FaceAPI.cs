@@ -12,10 +12,12 @@ namespace SimpleEchoBot.Utils
         {
             var contentStream = await ImageStream.GetImageStream(contentUrl);
 
+            //var faceUrl = "https://southeastasia.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceAttributes=age,gender,smile,glasses,emotion,hair,makeup,facialHair";
             var faceUrl = "https://southeastasia.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceAttributes=age,gender,smile,glasses,emotion,hair,makeup,facialHair";
 
             var req = new HttpRequestMessage(HttpMethod.Post, faceUrl);
-            req.Headers.Add("Ocp-Apim-Subscription-Key", "2f6d6ac45ccc4b9c9d5a3a9bd5b72699");
+            //req.Headers.Add("Ocp-Apim-Subscription-Key", "2f6d6ac45ccc4b9c9d5a3a9bd5b72699");
+            req.Headers.Add("Ocp-Apim-Subscription-Key", "2097404f5a8f4f6fbb7360b64d1af735");
             req.Content = new StreamContent(contentStream);
             req.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
 
