@@ -628,6 +628,12 @@ namespace SimpleEchoBot.Dialogs
         {
             switch (model)
             {
+                case "ACCORD":
+                    this.user.suggestCar3 = "Honda Accord";
+                    this.user.suggestUrl3 = "https://www.honda.co.th/th/accord/";
+                    this.user.suggestImage3 = "https://www.honda.co.th/assets/template/assets/images/share/nav/10.png";
+                    break;
+
                 case "BR-V":
                     this.user.suggestCar3 = "Honda BR-V";
                     this.user.suggestUrl3 = "https://www.honda.co.th/th/brv/";
@@ -656,6 +662,12 @@ namespace SimpleEchoBot.Dialogs
                     this.user.suggestCar3 = "Honda HR-V";
                     this.user.suggestUrl3 = "https://www.honda.co.th/th/hrv";
                     this.user.suggestImage3 = "https://www.honda.co.th/assets/template/assets/images/share/nav/11.png";
+                    break;
+
+                default:
+                    this.user.suggestCar3 = "Honda Civic";
+                    this.user.suggestUrl3 = "https://www.honda.co.th/civic/";
+                    this.user.suggestImage3 = "https://www.honda.co.th/assets/template/assets/images/share/nav/7.png";
                     break;
             }
         }
