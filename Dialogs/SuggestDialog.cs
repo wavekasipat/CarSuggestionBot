@@ -354,7 +354,7 @@ namespace SimpleEchoBot.Dialogs
                 str += $"\n5.หนวด : {this.user.moustache}, เครา : {this.user.beard}";
                 str += $"\n6.ใส่แว่น : {this.user.glasses}";
                 str += $"\n7.แต่งตา : {this.user.eyeMakeup}, ทาปาก : {this.user.lipMakeup}";
-                str += $"\n8.อารมณ์ : {this.user.emotion}";
+                str += $"\n8.อารมณ์ : {this.user.emotion.Replace('"', '')}";
                 await context.PostAsync(str);
 
                 await context.PostAsync($"หาก{this.user.genderThai}สนใจบริการ Commercial Chat Bot ของ MSC กรุณาติดต่อได้ที่ มีลาภ โสขุมา meelasok@metrosystems.co.th Mobile:(+668) 19095487");
